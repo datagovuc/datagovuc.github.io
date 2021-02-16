@@ -1,0 +1,38 @@
+baseURL = "https://datagovuc.gitlab.io/docs/"
+languageCode = "en-us"
+title = "[ GOB D+I ]"
+theme = "book"
+
+# Book configuration
+disablePathToLower = true
+# enableGitInfo = true
+
+enableEmoji=true
+
+# Needed for mermaid/katex shortcodes
+[markup]
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.tableOfContents]
+  startLevel = 1
+
+[params]
+  BookTheme = 'light'
+  BookToC = false
+  # /static/logo.png then the path would be logo.png
+  # BookLogo = 'logo.png'
+  BookSection = '/'
+
+[markup.highlight]
+  anchorLineNos = false
+  codeFences = true
+  guessSyntax = false
+  hl_Lines = ""
+  lineAnchors = ""
+  lineNoStart = 1
+  lineNos = false
+  lineNumbersInTable = true
+  noClasses = true
+  style = "tango"
+  tabWidth = 4
