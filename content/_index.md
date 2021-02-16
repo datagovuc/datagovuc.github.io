@@ -4,7 +4,7 @@ type: docs
 ---
 
 # **`DOCUMENTACIÓN DE PROCESOS GOB D+I`**
-change
+
 Sitio pensado para depositar la documentación relativa a los procesos de la Subdirección de Tecnología del GOB D+I.
 
 ## **Cómo editar el sitio**
@@ -12,7 +12,7 @@ Sitio pensado para depositar la documentación relativa a los procesos de la Sub
 Si no tenemos el proyecto en nuestra máquina local, clonamos el repositorio:
 
 ```bash
-git clone https://gitlab.com/datagovuc/docs.git
+git clone https://github.com/datagovuc/datagovuc.github.io.git
 ```
 Una vez clonado el repo, abrimos el proyecto con algún editor de texto, de preferencia Visual Studio Code:
 
