@@ -9,20 +9,20 @@ disablePathToLower = true
 
 enableEmoji=true
 
-# Needed for mermaid/katex shortcodes
-[markup]
-[markup.goldmark.renderer]
-  unsafe = true
+# Needed for mermaid/katex shortcodes --> use it only when some math is involved
+# [markup]
+# [markup.goldmark.renderer]
+#   unsafe = true
 
 [markup.tableOfContents]
   startLevel = 1
 
 [params]
-  BookTheme = 'light'
+  BookTheme = "light"
   BookToC = false
   # /static/logo.png then the path would be logo.png
   # BookLogo = 'logo.png'
-  BookSection = '/'
+  BookSection = "/"
 
 [markup.highlight]
   anchorLineNos = false
