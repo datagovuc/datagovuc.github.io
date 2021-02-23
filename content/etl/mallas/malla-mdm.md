@@ -53,7 +53,7 @@ Las reglas para encontrar pares entre los sistemas se encuentran en el Databrick
 
 Los procesos asociados a la malla MDM se muestran en la siguiente imagen:
 
-![](/mdm.png)
+![](/mdmpipeline.jpg)
 
 # **Tablas utilizadas en el proceso de la malla MDM**
 
@@ -143,6 +143,95 @@ Para el atributo **`process`** existe solo un valor posible:
 | :-- | :-- |
 | `concat` | antes de realizar la comparación, concatena todos los valores que tengan el atributo `concat` en el campo `process`. Por ejemplo, si los atributos A, B, C tiene el valor `concat` en el campo `process`, al momento de comparar la comparación no se hará de manera individual; la comparación se realizará con el valor resultante de la concatenación de A, B y C. Los valores nulos se consideran strings vacíos | 
 
+## `VALIDATION_TYPE`
+
+Describe los tipos de validación que se deben realizar a los grupos que podrían corresponder a la misma entidad.
+
+| Atributo | Descripción |
+| :-- | :-- |
+| `validation_type_id`| id del registro |
+| `name` | descripción del registro |
+
+Actualmente se registran 3 tipos de validaciones:
+
+1. **Databricks notebook:** indica que el grupo debe ser revisado por el proceso de Databricks.
+2. **Move directly. All rows same row:** indica que el grupo contiene exactamente los mismos atributos o si solo se compone de un registro, por lo que no son necesarias más validaciones. Se puede trasladar directamente.
+3. **Resolved manually:** indica que el grupo coincide con un caso resuelto previamente de forma manual, por lo que no se deben realizar más validaciones y se debe trasladar el registro resuelto.
+
+# **Tablas utilizadas por entidad**
+
+## `PROCESSING_<entityName>`
+
+Para entidades sin fuente oficial. En esta tabla se ingresan los datos de las distintas fuentes descritas en `MCP_MDIUC.ENTITY_SYSTEM_TABLE`.
+
+| Atributo | Descripción |
+| :-- | :-- |
+| `group_id` | id utilizado para agrupar distintos registros que potencialmente corresponden a la misma entidad |
+| `validation_type_id` | tipo de validación que se debe realizar. Referencia a `MCP_MDIUC.VALIDATION_TYPE` |
+| `entity_system_table_id` | id de la tabla fuente de la que se extrajo el registro |
+| `primary_key` | llave primaria del registro en la fuente de origen |
+| `<atributo_entidad_1>` | este atributo (y los siguientes) corresponden a los atributos de la entidad en `MCP_MDIUC.ENTITY_ATTRIBUTE` |
+
+
+## `PROCESSED_<entityName>`
+
+Para entidades sin fuente oficial. En esta tabla se guardan los registros que representan a cada grupo de `MCP_MDIUC.PROCESSING_<entityName>`.
+
+| Atributo | Descripción |
+| :-- | :-- |
+| `group_id` | id del grupo. Utilizado para identificar a qué registros de `PROCESSING_<ENTITY>`
+está representanto este registro |
+| `<atributo_entidad_1>` | este atributo (y los siguientes) corresponden a los atributos de la entidad en `MCP_MDIUC.ENTITY_ATTRIBUTE` |
+
+## `UNMATCHED_<entityName>`
+
+En esta tabla se registran los IDs de los grupos que no cumplieron con las reglas de comparación descritas en `COMPARING_RULE` y que, por lo tanto, necesitan una revisión manual.
+
+| Atributo | Descripción |
+| :-- | :-- |
+| `group_id` | id del grupo. Utilizado para identificar a qué registros de `PROCESSING_<ENTITY>`
+no cumplieron con las reglas de comparación |
+
+## `CONFLICTIVE_<entityName>`
+
+Para entidades sin fuente oficial .En esta tabla se almacenan los registros con los datos de la fuente oficial del grupo que fue resuelto manualmente.
+
+| Atributo | Descripción |
+| :-- | :-- |
+| `conflicted_<entityName>_id` | id del registro |
+| `group_id` | id que agrupa los registros que corresponden a la misma entidad |
+| `entity_system_table_id` | id de la tabla fuente de la que se extrajo el registro. Referencia a `MCP_MDIUC.ENTITY_SYSTEM_TABLE` |
+| `<attributo_entitidad_1>` | este atributo y los siguientes corresponden a los atributos de la entidad descritos en `ENTITY_ATTRIBUTE`.
+
+## `RESOLUTION_<entityName>`
+
+En esta tabla se almacenan la información de resoluciones manuales de las entidades. Esta tabla puede tener dos estructuras:
+
+### **Entidad sin fuente oficial**
+
+En esta tabla se almacena el registro al cuál se resuelve desde el grupo almacenado en `CONFLICTIVE_<entityName>`.
+
+| Atributo | Descripción |
+| :-- | :-- |
+| `conflicted_<entityName>_id` | id del registro |
+| `group_id` | id que agrupa los registros que corresponden a la misma entidad |
+| `entity_system_table_id` | id de la tabla fuente de la que se extrajo el registro. Referencia a `MCP_MDIUC.ENTITY_SYSTEM_TABLE` |
+| `<attributo_entitidad_1>` | este atributo y los siguientes corresponden a los atributos de la entidad descritos en `ENTITY_ATTRIBUTE`.
+
+
+
+### **Entidad con fuente oficial**
+
+En esta tabla se almacena la referencia a la tabla de origen del registro y a cuál corresponde en la tabla oficial.
+
+| Atributo | Descripción |
+| :-- | :-- |
+| `conflicted_<entityName>_id` | id del registro |
+| `entity_system_table_id` | id de la tabla fuente de la que se extrajo el registro. Referencia a `MCP_MDIUC.ENTITY_SYSTEM_TABLE` |
+| `pk_source`| valor de la llave primaria en la tabla de origen correspondiente a `entity_system_table_id` |
+| `pk_official_source` | valor de la llave primaria en la tabla maestra correspondiente a la entidad | 
+
+
 # **Pasos para ingresar una entidad a la malla MDM**
 
 | Paso | Descripción |
@@ -155,6 +244,9 @@ Para el atributo **`process`** existe solo un valor posible:
 | 5 | Ingresar reglas de agrupación a `MCP_MDIUC.GROUPING_RULE` |
 | 6 | Ingresar reglas de comparación a `MCP_MDIUC.COMPARING_RULE` |
 | 7 | Ejecutar malla en Azure DataFactory `MCP_MDIUC` |
+
+
+<!-- DE AQUÍ EN ADELANTE FALTA AGREGAR INFO ACTUALIZADA -->
 
 
 # **Pruebas de la malla**
