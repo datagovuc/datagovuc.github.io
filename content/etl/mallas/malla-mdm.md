@@ -246,13 +246,62 @@ En esta tabla se almacena la referencia a la tabla de origen del registro y a cu
 | 7 | Ejecutar malla en Azure DataFactory `MCP_MDIUC` |
 
 
-<!-- DE AQUÍ EN ADELANTE FALTA AGREGAR INFO ACTUALIZADA -->
+Al ejecutar la malla se crearán las siguientes tablas si es que no existen previamente:
+
++ `MCP_MDIUC.PROCESSING_<entityName>`
++ `MCP_MDIUC.PROCESSED_<entityName>`
++ `MCP_MDIUC.UNMATCHED_<entityName>`
++ `MCP_MDIUC.CONFLICTIVE_<entityName>`
++ `MCP_MDIUC.RESOLUTION_<entityName>`
+
+## **Resolución manual de conflictos**
+
+Para ingresar los casos resueltos manualmente a la malla MDM se utilizan las tablas `MCP_MDIUC.CONFLICTIVE_<entityName>` (en casos de entidades sin fuente oficial) y `MCP_MDIUC.RESOLUTION_<entityName>`.
+
+### **Para entidades sin fuente oficial**
+
+1. La malla revisa si alguno de los grupos en `PROCESSING_<entityName>` existe también en `CONFLICTIVE_<entityName>`.
+
+2. Si un grupo existe, marca el grupo en `PROCESSING_<entityName>` con `validation_type_id = 3` para que no sea procesado por los siguientes pasos de la malla (SP o Databricks).
+
+3. Copia el registro correspondiente al grupo desde `RESOLUTION_<entityName>`.
+
+
+### **Para entidades con fuente oficial**
+
+1. El script en Databricks revisa si el registro de la fuente oficial que está siendo procesado coincide con alguno en `RESOLUTION_<entityName>` utilizando el atributo `pk_source`.
+
+2. Si el registro existe, simplemente se utiliza el registro oficial identificado con `pk_official_source` como la traducción desde la fuente de origen en la tabla maestra.
+
+
 
 
 # **Pruebas de la malla**
 
-Para probar la malla existen las tablas `NORMALIZADO_TEST.PEOPLE_SOFT_PERSON` y `NORMALIZADO_TEST.BANNER_PERSON`.
+Para probar la malla existen dos entidades:
+
++ `MDIUC.PERSON_TEST`
++ `MDIUC.COUNTRY`
+
+## `PERSON_TEST`
+
+Corresponde a una versión reducida de `PERSON`. Sus tablas de origen son:
++ `NORMALIZADO_TEST.PERSON_BANNER`
++ `NORMALIZADO_TEST.PERSON_PEOPLE_SOFT`
 
 Cada tabla contiene el RUT, dígito verificador, apellido paterno y materno, y el nombre. Los registros de estas tablas de extrajeron de Banner y PeopleSoft respectivamente.
 
-Cada tabla contiene 130 registros. Existen 100 RUTs que aparecen en ambas tablas . Los 30 registros restantes tienen RUTs exclusivos de esa tabla, es decir, no aparecen en la otra tabla.
+Cada tabla contiene 90 registros. Existen 100 RUTs que aparecen en ambas tablas. De ellos:
+
++ Hay 5 personas con el mismo RUT pero distintos nombres entre `PERSON_BANNER` y `PERSON_PEOPLE_SOFT` (personas distintas). Para una de ellas, existe una resolución manual en las tablas `CONFLICTIVE_PERSON_TEST `y `RESOLUTION_PERSON_TEST`.
+
++ Hay 10 personas con el mismo RUT pero con el nombre un poco distinto entre `PERSON_BANNER` y `PERSON_PEOPLE_SOFT` (misma persona).
+
++ Hay 65 personas con mismo RUT y mismo nombre entre `PERSON_BANNER` y `PERSON_PEOPLE_SOFT`.
+
+## `COUNTRY`
+
+Esta entidad con fuente oficial hace referencia a las tablas:
+
++ `UC_BANNER.PAIS`
++ `NORMALIZADO_PEOPLE_SOFT.COUNTRY`

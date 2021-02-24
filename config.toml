@@ -14,8 +14,8 @@ enableEmoji=true
 # [markup.goldmark.renderer]
 #   unsafe = true
 
-[markup.tableOfContents]
-  startLevel = 1
+# [markup.tableOfContents]
+#   startLevel = 1
 
 [params]
   BookTheme = "light"
