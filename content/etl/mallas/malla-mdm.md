@@ -78,7 +78,7 @@ Registra los atributos que se almacenan en el golden record de una entidad.
 | :-- | :-- |
 | `entity_attribute_id` | id único del registro |
 | `entity_id` | id de la entidad de la tabla `MCP_MDIUC.ENTITY` a la que se hace referencia |
-| `attribute_name` | nombre del atributo |
+| `attribute_name` | nombre del atributo de la entidad en `MCP_MDIUC.ENTITY` |
 | `attribute_type` | tipo de dato del atributo; puede ser `int`, `nvarchar` o `datetime` |
 | `is_primary_key` | indica si el atributo es parte de la primary key de la entidad en su tabla en `dev_stage_datagov.MDIUC` |
 
