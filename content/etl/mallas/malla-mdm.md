@@ -29,7 +29,7 @@ Las reglas para encontrar pares entre los sistemas se encuentran en el Databrick
 
 ## **ENTITY_WITHOUT_OFFICIAL_SOURCE**
 
-1. Prepara las tablas auxiliares que se utilizarán en el proceso. Las tablas viven en la BD `dev_stage_datagov` y son las siguientes:
+1. Este [pipeline](https://adf.azure.com/en-us/authoring/pipeline/ENTITY_WITHOUT_OFFICIAL_SOURCE?factory=%2Fsubscriptions%2F2e9b712f-7bd2-4ee5-9dba-8da83bc457fb%2FresourceGroups%2FETL%2Fproviders%2FMicrosoft.DataFactory%2Ffactories%2Fdatagov-df-devOps) prepara las tablas auxiliares que se utilizarán en el proceso. Las tablas viven en la BD `dev_stage_datagov` y son las siguientes:
 
     | Tabla | Descripción |
     |:-- | :-- |
