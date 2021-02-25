@@ -291,7 +291,9 @@ Corresponde a una versión reducida de `PERSON`. Sus tablas de origen son:
 
 Cada tabla contiene el RUT, dígito verificador, apellido paterno y materno, y el nombre. Los registros de estas tablas de extrajeron de Banner y PeopleSoft respectivamente.
 
-Cada tabla contiene 90 registros. Existen 80 RUTs que aparecen en ambas tablas. De ellos:
+Cada tabla contiene 90 registros. 
+
+Existen 80 RUTs que aparecen en ambas tablas. De ellos:
 
 + Hay 5 personas con el mismo RUT pero distintos nombres entre `PERSON_BANNER` y `PERSON_PEOPLE_SOFT` (personas distintas). Para una de ellas, existe una resolución manual en las tablas `CONFLICTIVE_PERSON_TEST `y `RESOLUTION_PERSON_TEST`.
 
