@@ -143,18 +143,22 @@ VALUES
     , ('PERSON_TEST',1,0)
     , ('PERSON_TEST_2',0,0)
 
-    -- ENTITY_ATTRIBUTE
+-- ENTITY_ATTRIBUTE
 INSERT INTO MCP_MDIUC.ENTITY_ATTRIBUTE (entity_id, attribute_name, attribute_type, is_primary_key)
 VALUES
-    (20,'rut','nvarchar',1)
-    (20,'dv','nvarchar',0)
-    (20,'paternal_last_name','nvarchar',0)
-    (20,'maternal_last_name','nvarchar',0)
-    (20,'name','nvarchar',0)
-    (21,'rut','nvarchar',1)
-    (21,'dv','nvarchar',0)
-    (21,'paternal_last_name','nvarchar',0)
-    (21,'maternal_last_name','nvarchar',0)
-    (21,'name','nvarchar',0)
+      (20,'rut','nvarchar',1)
+    , (20,'dv','nvarchar',0)
+    , (20,'paternal_last_name','nvarchar',0)
+    , (20,'maternal_last_name','nvarchar',0)
+    , (20,'name','nvarchar',0)
+    , (21,'rut','nvarchar',1)
+    , (21,'dv','nvarchar',0)
+    , (21,'paternal_last_name','nvarchar',0)
+    , (21,'maternal_last_name','nvarchar',0)
+    , (21,'name','nvarchar',0)
+
+-- ENTITY_SYSTEM_TABLE
+INSERT INTO MCP_MDIUC.ENTITY_SYSTEM_TABLE(entity_id, [schema_name], table_name, primary_key)
+VALUES
 ```
 
