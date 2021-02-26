@@ -39,7 +39,96 @@ Esta entidad con fuente oficial hace referencia a las tablas:
 
 # **Cómo llenar las tablas que consume el pipeline MDM**
 
-A continuación, un ejemplo de las tablas consumidas por el pipelina de MDM para las tablas `MDIUC.PERSON_TEST` y `MDIUC.COUNTRY`:
+A continuación, los pasos para llenar la tablas que se utilizan por el pipeline del MDM.
+
+# **Pasos para llenar las tablas que consume el pipeline del MDM**
+
+1. Limpiar las tablas que utiliza el pipeline. Para ello ejecutamos el siguiente script:
+
+```sql
+TRUNCATE TABLE MCP_MDIUC.COMPARING_RULE
+TRUNCATE TABLE MCP_MDIUC.GROUPING_RULE
+TRUNCATE TABLE MCP_MDIUC.ENTITY_ATTRIBUTE_SYSTEM_MAPPING
+
+-- Due to some of their columns being referenced as FK by other tables, we cannot simply truncate these tables. So we delete their rows
+DELETE FROM MCP_MDIUC.ENTITY_SYSTEM_TABLE WHERE entity_system_table_id IN (SELECT entity_system_table_id FROM MCP_MDIUC.ENTITY_SYSTEM_TABLE)
+DELETE FROM MCP_MDIUC.ENTITY_ATTRIBUTE WHERE entity_attribute_id IN (SELECT entity_attribute_id FROM MCP_MDIUC.ENTITY_ATTRIBUTE)
+DELETE FROM MCP_MDIUC.ENTITY WHERE entity_id IN (SELECT entity_id FROM MCP_MDIUC.ENTITY)
+```
+
+2. Poblamos las tablas con datos:
+
+```sql
+-- ENTITY
+INSERT INTO MCP_MDIUC.ENTITY ([name], is_valid, has_official_source)
+VALUES 
+      ('PERSON_TEST',1,0)
+    , ('PERSON_TEST_2',0,0)
+
+-- ENTITY_ATTRIBUTE
+INSERT INTO MCP_MDIUC.ENTITY_ATTRIBUTE (entity_id, attribute_name, attribute_type, is_primary_key)
+VALUES
+      (20,'rut','nvarchar',1)
+    , (20,'dv','nvarchar',0)
+    , (20,'paternal_last_name','nvarchar',0)
+    , (20,'maternal_last_name','nvarchar',0)
+    , (20,'name','nvarchar',0)
+    , (21,'rut','nvarchar',1)
+    , (21,'dv','nvarchar',0)
+    , (21,'paternal_last_name','nvarchar',0)
+    , (21,'maternal_last_name','nvarchar',0)
+    , (21,'name','nvarchar',0)
+
+-- ENTITY_SYSTEM_TABLE
+INSERT INTO MCP_MDIUC.ENTITY_SYSTEM_TABLE(entity_id, [schema_name], table_name, primary_key)
+VALUES
+      (20,'NORMALIZADO_TEST','PERSON_BANNER','rut')
+    , (20,'NORMALIZADO_TEST','PERSON_PEOPLE_SOFT','rut')
+    , (21,'NORMALIZADO_TEST','PERSON_BANNER','rut')
+    , (21,'NORMALIZADO_TEST','PERSON_PEOPLE_SOFT','rut')
+
+-- ENTITY_ATTRIBUTE_SYSTEM_MAPPING
+INSERT INTO MCP_MDIUC.ENTITY_ATTRIBUTE_SYSTEM_MAPPING (entity_attribute_id, entity_system_table_id, column_name, attribute_rank)
+VALUES
+      (85,36,'rut',1)
+    , (85,37,'rut',2)
+    , (86,36,'check_digit',1)
+    , (86,37,'check_digit',2)
+    , (87,36,'paternal_last_name',1)
+    , (87,37,'paternal_last_name',2)
+    , (88,36,'maternal_last_name',1)
+    , (88,37,'maternal_last_name',2)
+    , (89,36,'first_name',1)
+    , (89,37,'name',2)
+    , (90,38,'rut',1)
+    , (90,39,'rut',2)
+    , (91,38,'check_digit',1)
+    , (91,39,'check_digit',2)
+    , (92,38,'paternal_last_name',1)
+    , (92,39,'paternal_last_name',2)
+    , (93,38,'maternal_last_name',1)
+    , (93,39,'maternal_last_name',2)
+    , (94,38,'first_name',1)
+    , (94,39,'name',2)
+
+-- GROUPING_RULE
+INSERT INTO MCP_MDIUC.GROUPING_RULE
+VALUES
+      (85)
+    , (90)
+
+-- COMPARING_RULE
+INSERT INTO MCP_MDIUC.COMPARING_RULE (entity_attribute_id, rule_type, parameter, process)
+VALUES
+      (87,'fuzzy_allow_empty',70,'concat')
+    , (88,'fuzzy_allow_empty',70,'concat')
+    , (89,'fuzzy_allow_empty',70,'concat')
+    , (92,'fuzzy_allow_empty',70,'concat')
+    , (93,'fuzzy_allow_empty',70,'concat')
+    , (94,'fuzzy_allow_empty',70,'concat')
+```
+
+El ejemplo anterior va a generar las siguientes tablas:
 
 ### **MCP_MDIUC.ENTITY**
 
@@ -117,94 +206,3 @@ A continuación, un ejemplo de las tablas consumidas por el pipelina de MDM para
 | 7 | 92 | fuzzy_allow_empty | 70 | concat |
 | 8 | 93 | fuzzy_allow_empty | 70 | concat |
 | 9 | 94 | fuzzy_allow_empty | 70 | concat |
-
-# **Pasos para llenar las tablas que consume el pipeline del MDM**
-
-1. Limpiar las tablas que utiliza el pipeline. Para ello ejecutamos el siguiente script:
-
-```sql
-TRUNCATE TABLE MCP_MDIUC.COMPARING_RULE
-TRUNCATE TABLE MCP_MDIUC.GROUPING_RULE
-TRUNCATE TABLE MCP_MDIUC.ENTITY_ATTRIBUTE_SYSTEM_MAPPING
-
--- Due to some of their columns being referenced as FK by other tables, we cannot simply truncate these tables. So we delete their rows
-DELETE FROM MCP_MDIUC.ENTITY_SYSTEM_TABLE WHERE entity_system_table_id IN (SELECT entity_system_table_id FROM MCP_MDIUC.ENTITY_SYSTEM_TABLE)
-DELETE FROM MCP_MDIUC.ENTITY_ATTRIBUTE WHERE entity_attribute_id IN (SELECT entity_attribute_id FROM MCP_MDIUC.ENTITY_ATTRIBUTE)
-DELETE FROM MCP_MDIUC.ENTITY WHERE entity_id IN (SELECT entity_id FROM MCP_MDIUC.ENTITY)
-```
-
-2. Poblamos las tablas con datos:
-
-```sql
--- ENTITY
-INSERT INTO MCP_MDIUC.ENTITY ([name], is_valid, has_official_source)
-VALUES 
-      ('COUNTRY',0,1)
-    , ('PERSON_TEST',1,0)
-    , ('PERSON_TEST_2',0,0)
-
--- ENTITY_ATTRIBUTE
-INSERT INTO MCP_MDIUC.ENTITY_ATTRIBUTE (entity_id, attribute_name, attribute_type, is_primary_key)
-VALUES
-      (20,'rut','nvarchar',1)
-    , (20,'dv','nvarchar',0)
-    , (20,'paternal_last_name','nvarchar',0)
-    , (20,'maternal_last_name','nvarchar',0)
-    , (20,'name','nvarchar',0)
-    , (21,'rut','nvarchar',1)
-    , (21,'dv','nvarchar',0)
-    , (21,'paternal_last_name','nvarchar',0)
-    , (21,'maternal_last_name','nvarchar',0)
-    , (21,'name','nvarchar',0)
-
--- ENTITY_SYSTEM_TABLE
-INSERT INTO MCP_MDIUC.ENTITY_SYSTEM_TABLE(entity_id, [schema_name], table_name, primary_key)
-VALUES
-      (19,'UC_BANNER','PAIS','COD_PAIS')
-    , (19,'NORMALIZADO_PEOPLE_SOFT','COUNTRY','code')
-    , (20,'NORMALIZADO_TEST','PERSON_BANNER','rut')
-    , (20,'NORMALIZADO_TEST','PERSON_PEOPLE_SOFT','rut')
-    , (21,'NORMALIZADO_TEST','PERSON_BANNER','rut')
-    , (21,'NORMALIZADO_TEST','PERSON_PEOPLE_SOFT','rut')
-
--- ENTITY_ATTRIBUTE_SYSTEM_MAPPING
-INSERT INTO MCP_MDIUC.ENTITY_ATTRIBUTE_SYSTEM_MAPPING (entity_attribute_id, entity_system_table_id, column_name, attribute_rank)
-VALUES
-      (85,36,'rut',1)
-    , (85,37,'rut',2)
-    , (86,36,'check_digit',1)
-    , (86,37,'check_digit',2)
-    , (87,36,'paternal_last_name',1)
-    , (87,37,'paternal_last_name',2)
-    , (88,36,'maternal_last_name',1)
-    , (88,37,'maternal_last_name',2)
-    , (89,36,'first_name',1)
-    , (89,37,'name',2)
-    , (90,38,'rut',1)
-    , (90,39,'rut',2)
-    , (91,38,'check_digit',1)
-    , (91,39,'check_digit',2)
-    , (92,38,'paternal_last_name',1)
-    , (92,39,'paternal_last_name',2)
-    , (93,38,'maternal_last_name',1)
-    , (93,39,'maternal_last_name',2)
-    , (94,38,'first_name',1)
-    , (94,39,'name',2)
-
--- GROUPING_RULE
-INSERT INTO MCP_MDIUC.GROUPING_RULE
-VALUES
-      (85)
-    , (90)
-
--- COMPARING_RULE
-INSERT INTO MCP_MDIUC.COMPARING_RULE (entity_attribute_id, rule_type, parameter, process)
-VALUES
-      (87,'fuzzy_allow_empty',70,'concat')
-    , (88,'fuzzy_allow_empty',70,'concat')
-    , (89,'fuzzy_allow_empty',70,'concat')
-    , (92,'fuzzy_allow_empty',70,'concat')
-    , (93,'fuzzy_allow_empty',70,'concat')
-    , (94,'fuzzy_allow_empty',70,'concat')
-```
-

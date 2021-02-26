@@ -13,8 +13,7 @@ Esta seccion blabla
 
 ### 1. Monitoreo Catalogo y consistencia de tablas
 
-<iframe width="1000" height="420" src="https://app.powerbi.com/view?r=eyJrIjoiNTZmYmI0ZDMtMGZjMS00NzY2LWJhMWMtOTZhMzZlZmVkNzU2IiwidCI6IjVmZjVkOWZhLWY4M2YtNGFjMS1hNGQyLWViNDhlYTBhMDBkMiIsImMiOjR9&pageName=ReportSectione03b0e9fef1fe0b13432" frameborder="0" allowFullScreen="true"></iframe>
-
+<iframe width="800" height="420" src="https://app.powerbi.com/view?r=eyJrIjoiNTZmYmI0ZDMtMGZjMS00NzY2LWJhMWMtOTZhMzZlZmVkNzU2IiwidCI6IjVmZjVkOWZhLWY4M2YtNGFjMS1hNGQyLWViNDhlYTBhMDBkMiIsImMiOjR9&pageName=ReportSectione03b0e9fef1fe0b13432" frameborder="0" allowFullScreen="true"></iframe>
 
 ### 2. Monitoreo Proceso ETL
 
