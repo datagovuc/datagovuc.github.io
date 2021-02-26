@@ -134,7 +134,6 @@ El ejemplo anterior va a generar las siguientes tablas:
 
 | entity_id | name | is_valid | has_official_source |
 | :-- | :-- | :-- | :-- |
-| 19 | COUNTRY | 0 | 1 |
 | 20 | PERSON_TEST | 1 | 0 |
 | 21 | PERSON_TEST_2 | 0 | 0 |
 
@@ -157,8 +156,6 @@ El ejemplo anterior va a generar las siguientes tablas:
 
 | entity_system_table_id | entity_id | schema_name | table_name | primary_key |
 | :-- | :-- | :-- | :-- | :-- |
-| 34 | 19 | UC_BANNER | PAIS | COD_PAIS |
-| 35 | 19 | NORMALIZADO_PEOPLE_SOFT | COUNTRY | code |
 | 36 | 20 | NORMALIZADO_TEST | PERSON_BANNER | rut |
 | 37 | 20 | NORMALIZADO_TEST | PERSON_PEOPLE_SOFT | rut |
 | 38 | 21 | NORMALIZADO_TEST | PERSON_BANNER | rut |
