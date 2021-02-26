@@ -166,5 +166,45 @@ VALUES
     , (20,'NORMALIZADO_TEST','PERSON_PEOPLE_SOFT','rut')
     , (21,'NORMALIZADO_TEST','PERSON_BANNER','rut')
     , (21,'NORMALIZADO_TEST','PERSON_PEOPLE_SOFT','rut')
+
+-- ENTITY_ATTRIBUTE_SYSTEM_MAPPING
+INSERT INTO MCP_MDIUC.ENTITY_ATTRIBUTE_SYSTEM_MAPPING (entity_attribute_id, entity_system_table_id, column_name, attribute_rank)
+VALUES
+      (85,36,'rut',1)
+    , (85,37,'rut',2)
+    , (86,36,'check_digit',1)
+    , (86,37,'check_digit',2)
+    , (87,36,'paternal_last_name',1)
+    , (87,37,'paternal_last_name',2)
+    , (88,36,'maternal_last_name',1)
+    , (88,37,'maternal_last_name',2)
+    , (89,36,'first_name',1)
+    , (89,37,'name',2)
+    , (90,38,'rut',1)
+    , (90,39,'rut',2)
+    , (91,38,'check_digit',1)
+    , (91,39,'check_digit',2)
+    , (92,38,'paternal_last_name',1)
+    , (92,39,'paternal_last_name',2)
+    , (93,38,'maternal_last_name',1)
+    , (93,39,'maternal_last_name',2)
+    , (94,38,'first_name',1)
+    , (94,39,'name',2)
+
+-- GROUPING_RULE
+INSERT INTO MCP_MDIUC.GROUPING_RULE
+VALUES
+      (85)
+    , (90)
+
+-- COMPARING_RULE
+INSERT INTO MCP_MDIUC.COMPARING_RULE (entity_attribute_id, rule_type, parameter, process)
+VALUES
+      (87,'fuzzy_allow_empty',70,'concat')
+    , (88,'fuzzy_allow_empty',70,'concat')
+    , (89,'fuzzy_allow_empty',70,'concat')
+    , (92,'fuzzy_allow_empty',70,'concat')
+    , (93,'fuzzy_allow_empty',70,'concat')
+    , (94,'fuzzy_allow_empty',70,'concat')
 ```
 
