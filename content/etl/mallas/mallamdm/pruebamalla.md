@@ -50,10 +50,27 @@ TRUNCATE TABLE MCP_MDIUC.COMPARING_RULE
 TRUNCATE TABLE MCP_MDIUC.GROUPING_RULE
 TRUNCATE TABLE MCP_MDIUC.ENTITY_ATTRIBUTE_SYSTEM_MAPPING
 
--- Due to some of their columns being referenced as FK by other tables, we cannot simply truncate these tables. So we delete their rows
-DELETE FROM MCP_MDIUC.ENTITY_SYSTEM_TABLE WHERE entity_system_table_id IN (SELECT entity_system_table_id FROM MCP_MDIUC.ENTITY_SYSTEM_TABLE)
-DELETE FROM MCP_MDIUC.ENTITY_ATTRIBUTE WHERE entity_attribute_id IN (SELECT entity_attribute_id FROM MCP_MDIUC.ENTITY_ATTRIBUTE)
-DELETE FROM MCP_MDIUC.ENTITY WHERE entity_id IN (SELECT entity_id FROM MCP_MDIUC.ENTITY)
+/* Due to some of their columns being referenced as FK by other tables, we cannot simply truncate these tables. So we delete their rows */
+-- MCP_MDIUC.ENTITY_SYSTEM_TABLE
+DELETE FROM MCP_MDIUC.ENTITY_SYSTEM_TABLE 
+WHERE entity_system_table_id IN (
+    SELECT entity_system_table_id 
+    FROM MCP_MDIUC.ENTITY_SYSTEM_TABLE
+    )
+
+-- MCP_MDIUC.ENTITY_ATTRIBUTE
+DELETE FROM MCP_MDIUC.ENTITY_ATTRIBUTE 
+WHERE entity_attribute_id IN (
+    SELECT entity_attribute_id 
+    FROM MCP_MDIUC.ENTITY_ATTRIBUTE
+    )
+
+-- MCP_MDIUC.ENTITY
+DELETE FROM MCP_MDIUC.ENTITY 
+WHERE entity_id IN (
+    SELECT entity_id 
+    FROM MCP_MDIUC.ENTITY
+    )
 ```
 
 2. Poblamos las tablas con datos:
