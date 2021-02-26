@@ -1,6 +1,6 @@
 ---
-weight: 5
-title: "Malla MDM"
+weight: 1
+title: "HOW-TO"
 ---
 
 # **Malla MDM**
@@ -152,11 +152,17 @@ Describe los tipos de validación que se deben realizar a los grupos que podría
 | `validation_type_id`| id del registro |
 | `name` | descripción del registro |
 
-Actualmente se registran 3 tipos de validaciones:
+Actualmente se registran 3 tipos de validaciones (`id` = `validation_type_id`):
 
-1. **Databricks notebook:** indica que el grupo debe ser revisado por el proceso de Databricks.
+| `id` | Nombre | Descripción |
+| :-- | :-- | :-- |
+| 1 | Databricks notebook | indica que el grupo debe ser revisado por el proceso de Databricks |
+| 2 | Move directly. All rows same row | indica que el grupo contiene exactamente los mismos atributos o si solo se compone de un registro, por lo que no son necesarias más validaciones. Se puede trasladar directamente |
+| 3 | Resolved manually | indica que el grupo coincide con un caso resuelto previamente de forma manual, por lo que no se deben realizar más validaciones y se debe trasladar el registro resuelto |
+
+<!-- 1. **Databricks notebook:** indica que el grupo debe ser revisado por el proceso de Databricks.
 2. **Move directly. All rows same row:** indica que el grupo contiene exactamente los mismos atributos o si solo se compone de un registro, por lo que no son necesarias más validaciones. Se puede trasladar directamente.
-3. **Resolved manually:** indica que el grupo coincide con un caso resuelto previamente de forma manual, por lo que no se deben realizar más validaciones y se debe trasladar el registro resuelto.
+3. **Resolved manually:** indica que el grupo coincide con un caso resuelto previamente de forma manual, por lo que no se deben realizar más validaciones y se debe trasladar el registro resuelto. -->
 
 # **Tablas utilizadas por entidad**
 
@@ -170,7 +176,7 @@ Para entidades sin fuente oficial. En esta tabla se ingresan los datos de las di
 | `validation_type_id` | tipo de validación que se debe realizar. Referencia a `MCP_MDIUC.VALIDATION_TYPE` |
 | `entity_system_table_id` | id de la tabla fuente de la que se extrajo el registro |
 | `primary_key` | llave primaria del registro en la fuente de origen |
-| `<atributo_entidad_1>` | este atributo (y los siguientes) corresponden a los atributos de la entidad en `MCP_MDIUC.ENTITY_ATTRIBUTE` |
+| `<atributo_entidad_i>` | con i &isin; {1, ... , n}. Corresponden a los atributos de la entidad en `MCP_MDIUC.ENTITY_ATTRIBUTE` |
 
 
 ## `PROCESSED_<entityName>`
@@ -180,7 +186,7 @@ Para entidades sin fuente oficial. En esta tabla se guardan los registros que re
 | Atributo | Descripción |
 | :-- | :-- |
 | `group_id` | id del grupo. Utilizado para identificar a qué registros de `PROCESSING_<ENTITY> está representanto este registro |
-| `<atributo_entidad_1>` | este atributo (y los siguientes) corresponden a los atributos de la entidad en `MCP_MDIUC.ENTITY_ATTRIBUTE` |
+| `<atributo_entidad_i>` | con i &isin; {1, ... , n}. Corresponden a los atributos de la entidad en `MCP_MDIUC.ENTITY_ATTRIBUTE` |
 
 ## `UNMATCHED_<entityName>`
 
@@ -270,38 +276,3 @@ Para ingresar los casos resueltos manualmente a la malla MDM se utilizan las tab
 1. El script en Databricks revisa si el registro de la fuente oficial que está siendo procesado coincide con alguno en `RESOLUTION_<entityName>` utilizando el atributo `pk_source`.
 
 2. Si el registro existe, simplemente se utiliza el registro oficial identificado con `pk_official_source` como la traducción desde la fuente de origen en la tabla maestra.
-
-
-
-
-# **Pruebas de la malla**
-
-Para probar la malla existen dos entidades:
-
-+ `MDIUC.PERSON_TEST`
-+ `MDIUC.COUNTRY`
-
-## `PERSON_TEST`
-
-Corresponde a una versión reducida de `PERSON`. Sus tablas de origen son:
-+ `NORMALIZADO_TEST.PERSON_BANNER`
-+ `NORMALIZADO_TEST.PERSON_PEOPLE_SOFT`
-
-Cada tabla contiene el RUT, dígito verificador, apellido paterno y materno, y el nombre. Los registros de estas tablas de extrajeron de Banner y PeopleSoft respectivamente.
-
-Cada tabla contiene 90 registros. 
-
-Existen 80 RUTs que aparecen en ambas tablas. De ellos:
-
-+ Hay 5 personas con el mismo RUT pero distintos nombres entre `PERSON_BANNER` y `PERSON_PEOPLE_SOFT` (personas distintas). Para una de ellas, existe una resolución manual en las tablas `CONFLICTIVE_PERSON_TEST `y `RESOLUTION_PERSON_TEST`.
-
-+ Hay 10 personas con el mismo RUT pero con el nombre un poco distinto entre `PERSON_BANNER` y `PERSON_PEOPLE_SOFT` (misma persona).
-
-+ Hay 65 personas con mismo RUT y mismo nombre entre `PERSON_BANNER` y `PERSON_PEOPLE_SOFT`.
-
-## `COUNTRY`
-
-Esta entidad con fuente oficial hace referencia a las tablas:
-
-+ `UC_BANNER.PAIS`
-+ `NORMALIZADO_PEOPLE_SOFT.COUNTRY`
