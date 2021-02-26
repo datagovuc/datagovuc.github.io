@@ -1,7 +1,6 @@
 ---
 weight: 1
-# bookFlatSection: true
-title: "Monitoreo: Reportes Power BI"
+title: "Reportes Power BI"
 ---
 
 
