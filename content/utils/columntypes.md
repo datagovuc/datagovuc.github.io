@@ -32,3 +32,14 @@ WHERE s.[name] = '<nombreEsquema>'
 Donde 
 + `<nombreEsquema>`: es el nombre del esquema
 + `<nombreTabla`: es el nombre de la tabla
+
+{{< hint info >}}
+**Importante**  
+Se creó el siguiente SP para conocer los column types:
+
+`EXECUTE UTILS.ColumnTypes N'<nombreEsquema>', N'<nombreTabla>'`
+
+Y la function:
+
+`SELECT * FROM UTILS.ColumnType (N'<nombreEsquema>', N'<nombreTabla>')`
+{{< /hint >}}
