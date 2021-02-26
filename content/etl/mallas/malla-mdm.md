@@ -179,8 +179,7 @@ Para entidades sin fuente oficial. En esta tabla se guardan los registros que re
 
 | Atributo | Descripción |
 | :-- | :-- |
-| `group_id` | id del grupo. Utilizado para identificar a qué registros de `PROCESSING_<ENTITY>`
-está representanto este registro |
+| `group_id` | id del grupo. Utilizado para identificar a qué registros de `PROCESSING_<ENTITY> está representanto este registro |
 | `<atributo_entidad_1>` | este atributo (y los siguientes) corresponden a los atributos de la entidad en `MCP_MDIUC.ENTITY_ATTRIBUTE` |
 
 ## `UNMATCHED_<entityName>`
@@ -189,8 +188,7 @@ En esta tabla se registran los IDs de los grupos que no cumplieron con las regla
 
 | Atributo | Descripción |
 | :-- | :-- |
-| `group_id` | id del grupo. Utilizado para identificar a qué registros de `PROCESSING_<ENTITY>`
-no cumplieron con las reglas de comparación |
+| `group_id` | id del grupo. Utilizado para identificar a qué registros de `PROCESSING_<ENTITY>`no cumplieron con las reglas de comparación |
 
 ## `CONFLICTIVE_<entityName>`
 
