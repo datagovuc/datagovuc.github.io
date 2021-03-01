@@ -6,7 +6,7 @@ title: "Columns Description"
 
 ```sql
     SELECT
-        SCHEMA_NAME(so.schema_id) as [schema_name]
+          SCHEMA_NAME(so.schema_id) as [schema_name]
         , so.name                   as table_name
         , sc.name                   as column_name
         , sep.value                 as column_description
@@ -25,5 +25,5 @@ title: "Columns Description"
 **Importante**  
 Se creó la siguiente function:
 
-`SELECT * FROM UTILS.ColumnDescription (N'<tableName>', N'<columnName>')`
+`SELECT * FROM UTILS.ColumnDescription(N'<tableName>', N'<columnName>')`
 {{< /hint >}}
