@@ -23,7 +23,7 @@ title: "Columns Description"
 
 {{< hint info >}}
 **Importante**  
-Se creó la siguiente function:
+Se creó la siguiente function para retornar la descripción de todas las tablas que coincidan con `<tableName>`:
 
 `SELECT * FROM UTILS.ColumnDescription(N'<tableName>')`
 {{< /hint >}}
