@@ -2,9 +2,9 @@
 title: "Carga de tablas"
 ---
 
-# **Carga de tablas cuando el owner existe en MCP_CATALOGO**
+# **Carga de tablas desde Stage a Sandbox**
 
-A continuación, se ilustra cómo cargar las tablas `ETNIA`, `INDICE_VULNER_ESCOLAR` y `POSTUL` desde el esquema `ADMISION` de la BD `Stage-Datagov_Prod` hacia la BD `Sandbox-Datagov_Prod`. Ambas BDs viven en el server `datagov-uc`.
+A continuación, se ilustra cómo cargar las tablas (cuando estas existen en el MCP_CATOLGO) `ETNIA`, `INDICE_VULNER_ESCOLAR` y `POSTUL` desde el esquema `ADMISION` de la BD `Stage-Datagov_Prod` hacia la BD `Sandbox-Datagov_Prod`. Ambas BDs viven en el server `datagov-uc`.
 
 ## **Paso 1**
 
