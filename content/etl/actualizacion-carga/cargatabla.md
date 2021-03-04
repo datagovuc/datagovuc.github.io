@@ -72,8 +72,8 @@ SELECT [name]
     , create_date
     , modify_date
     , schema_id
-    , schema_name(schema_id)
+    , SCHEMA_NAME(schema_id)
 FROM sys.objects
-WHERE schema_name(schema_id) = 'ADMISION'
+WHERE SCHEMA_NAME(schema_id) = 'ADMISION'
     AND CAST(create_date AS DATE) = '2021-02-04'
 ```
