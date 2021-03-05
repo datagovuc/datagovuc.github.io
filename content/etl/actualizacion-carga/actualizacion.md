@@ -4,16 +4,16 @@ title: "Actualización de tablas"
 
 # **Actualización de tablas cuando el OWNER existe en MCP_CATALOGO**
 
-Para actualizar los datos de una tabla en particular en la BD `Stage-Datagov_Prod`, debemos aplicar los siguientes pasos (dentro de la misma base):
+Para actualizar los datos de una tabla en particular en la BD `Stage-Datagov_Prod`, debemos aplicar los siguientes pasos:
 
 {{< hint info >}}
 **Nota**
 Queda pendiente poner este proceso en un proceso unificado, ya sea SP o cualquier otro artefacto.
 {{< /hint >}}
 
-## **Paso 0**
+## **Paso 1**
 
-Si, por ejemplo, queremos actualizar las tablas que consume una vista, corremos los siguiente:
+Si, por ejemplo, queremos actualizar las tablas que consume una vista en la BD `Sandbox-Datagov_Prod`, corremos los siguiente:
 
 ```sql
 SELECT
@@ -25,9 +25,21 @@ WHERE VIEW_NAME = '<nombreVista>'
 
 Como se aprecia, solo recuperamos los campos que nos interesan, es decir, `TABLE_SCHEMA` y `TABLE_NAME`.
 
-## **Paso 1**
+## **Paso 2**
 
-Primero, vemos la última fecha de actualización de las tablas de interés para corroborar que no sea la del día en el que se hará la carga. Para ello corremos el script:
+Para asegurarnos que la tabla (o tablas) que queremos actualizar existen, debemos ir a la BD `dev_stage_datagov` y consultar el catálogo:
+
+```sql
+SELECT * FROM MCP.MCP_CATALOGO
+WHERE NOMBRE_OWNER = '<nombreOwner>'
+AND NOMBRE_TABLA = '<nombreTabla>'
+```
+
+Haremos el update de la data de las tablas que existan en `MCP.MCP_CATALOGO`.
+
+## **Paso 3**
+
+Luego, vemos la última fecha de actualización de las tablas para corroborar la útlima fecha de actualización de las tablas. Para ello corremos el script:
 
 ```sql
 SELECT * 
@@ -42,7 +54,7 @@ WHERE ID_CATALOGO IN (
 
 Donde `<nombreTabla> = TABLE_NAME` y `<nombreOwner> = TABLE_SCHEMA` según la información recuperada en el **Paso 0**.
 
-## **Paso 2**
+## **Paso 4**
 
 Luego, seteamos la última y la próxima fecha de actulización de las tablas, tanto para la malla ADL como para la malla STG. Lo siguiente hará que se actualicen los datos en lsa tablas de la BD `Stage-Datagov_Prod` una vez que se ejecute el pipeline:
 
@@ -60,8 +72,32 @@ WHERE ID_CATALOGO IN (
 )
 ```
 
-## **Paso 3**
+## **Paso 5**
 
 Una vez configurada la fecha de actualización debemos ir al Azure Data Factory de producción y en la [FASE 2](https://adf.azure.com/en-us/authoring/pipeline/Malla%20General?factory=%2Fsubscriptions%2F2e9b712f-7bd2-4ee5-9dba-8da83bc457fb%2FresourceGroups%2Fetl-prod%2Fproviders%2FMicrosoft.DataFactory%2Ffactories%2Fgobdi-df-prod) ejecutamos, primero, la malla ADL y luego la malla STG:
 
 ![](/mallaspipeline.png)
+
+## **Paso 6**
+
+Para asegurarnos que las tablas se modicaron en la fecha que hicimos el update corremos lo siguiente en la BD `Stage-Datagov_Prod`:
+
+```sql
+SELECT [name]
+    , create_date
+    , modify_date
+    , schema_id
+    , SCHEMA_NAME(schema_id)
+FROM sys.objects
+WHERE SCHEMA_NAME(schema_id) = '<nombreOwner>'
+ORDER BY modify_date DESC
+```
+
+
+Para ver el log del proceso corremos:
+
+```sql
+SELECT TOP 50 * 
+FROM [MCP].[MCP_LOG_PROCESO_BULK] 
+ORDER BY ID_LOG_PROCESO DESC
+```
