@@ -27,7 +27,7 @@ Como se aprecia, solo recuperamos los campos que nos interesan, es decir, `TABLE
 
 ## **Paso 2**
 
-Para asegurarnos que la tabla (o tablas) que queremos actualizar existen, debemos ir a la BD `dev_stage_datagov` y consultar el catálogo:
+Para asegurarnos que la tabla (o tablas) que queremos actualizar existen, hacemos la siguiente consulta en la BD `Stage-Datagov_Prod`:
 
 ```sql
 SELECT * FROM MCP.MCP_CATALOGO
@@ -39,7 +39,7 @@ Haremos el update de la data de las tablas que existan en `MCP.MCP_CATALOGO`.
 
 ## **Paso 3**
 
-Luego, vemos la última fecha de actualización de las tablas para corroborar la útlima fecha de actualización de las tablas. Para ello corremos el script:
+Luego, vemos la última fecha de actualización de las tablas para corroborar la útlima fecha de actualización de las tablas. Para ello corremos el script en la BD `Stage-Datagov_Prod`:
 
 ```sql
 SELECT * 
