@@ -2,12 +2,10 @@
 title: "Tablas consumidas por una vista"
 ---
 
-### **Query para revisar las tablas que consume una vista**
+### **Tablas que consume una vista**
 
-La siguente query muesta las tablas con las que se construye una vista:
+Se creó la siguiente función en la BD `Sandbox-Datagov_Prod` para retornar las tablas que consume una vista con la fecha de modificación de cada tabla:
 
 ```sql
-SELECT * 
-FROM INFORMATION_SCHEMA.VIEW_TABLE_USAGE 
-WHERE VIEW_NAME = '<tableName>'
+SELECT * FROM UTILS.ViewTablesUsage()
 ```
