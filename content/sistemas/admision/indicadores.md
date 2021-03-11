@@ -28,18 +28,33 @@ A continuación un análisis con los cruces para responder a los indicadores par
 
 ### **Número de postulantes de carreras de pregrado, según vía de equidad, en un año-periodo de admisión.**
 
-```sql
+<!-- ```sql
 SELECT ANO_ADMIS
     , COUNT(1)
 FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD 
 WHERE COD_CASO_ADMIS IN (218, 259, 221, 237, 209, 226)
 GROUP BY ANO_ADMIS
 ORDER BY ANO_ADMIS
+``` -->
+```sql
+SELECT 
+      ANO_ADMIS
+    , NOM_CASO_ADMIS
+    , SEXO
+    , COUNT(1) AS NUM_POSTULANTES
+FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD_PAS
+WHERE COD_CASO_ADMIS IN (218, 259, 221, 237, 209, 226)
+GROUP BY 
+      ANO_ADMIS
+    , NOM_CASO_ADMIS
+    , SEXO
+ORDER BY ANO_ADMIS DESC
 ```
+
 
 ### **Número de postulantes seleccionados a carreras de pregrado según vía de equidad en un año-periodo de admisión**
 
-```sql
+<!-- ```sql
 SELECT ANO_ADMIS
     , COUNT(1)
 FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD 
@@ -48,11 +63,27 @@ WHERE COD_CASO_ADMIS IN (218, 259, 221, 237, 209, 226)
     OR COD_SIT_POSTULACION = 'S'
 GROUP BY ANO_ADMIS
 ORDER BY ANO_ADMIS
+``` -->
+```sql
+SELECT 
+      ANO_ADMIS
+    , NOM_CASO_ADMIS
+    , SEXO
+    , COUNT(1) AS NUM_POSTULANTES
+FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD_PAS
+WHERE COD_CASO_ADMIS IN (218, 259, 221, 237, 209, 226)
+    AND COD_EST_POSTULACION IN (4, 6)
+    OR COD_SIT_POSTULACION = 'S'
+GROUP BY 
+      ANO_ADMIS
+    , NOM_CASO_ADMIS
+    , SEXO
+ORDER BY ANO_ADMIS DESC
 ```
 
 ### **Número de estudiantes matriculados en carreras de pregrado según vía de equidad en un año-periodo de admisión**
 
-```sql
+<!-- ```sql
 SELECT ANO_ADMIS
     , COUNT(1)
 FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD 
@@ -61,6 +92,25 @@ WHERE COD_CASO_ADMIS IN (218, 259, 221, 237, 209, 226)
     OR COD_SIT_POSTULACION = 'U'
 GROUP BY ANO_ADMIS
 ORDER BY ANO_ADMIS
+``` -->
+
+```sql
+SELECT 
+      ANO_ADMIS
+    , NOM_CASO_ADMIS
+    , COD_CASO_ADMIS
+    , SEXO
+    , COUNT(1) AS NUM_POSTULANTES
+FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD_PAS
+WHERE COD_CASO_ADMIS IN (218, 259, 221, 237, 209, 226)
+    AND (COD_EST_POSTULACION = 7
+        OR COD_SIT_POSTULACION = 'U')
+GROUP BY
+      ANO_ADMIS
+    , NOM_CASO_ADMIS
+    , COD_CASO_ADMIS
+    , SEXO
+ORDER BY ANO_ADMIS DESC
 ```
 
 ## **2. Estudiantes-postulantes pertenecientes a una etnia**
@@ -68,14 +118,19 @@ ORDER BY ANO_ADMIS
 ### **Número de estudiantes pertenecientes a una etnia, por año-periodo de admisión**
 
 ```sql
----- Se debe traer las tablas etnia y postul a sandbox
-SELECT
-    ANO_ADMIS
-    , COUNT(1)
-FROM ADMISION.POSTUL
-WHERE COD_ETNIA <> 10
-    AND COD_ETNIA IS NOT NULL
-GROUP BY ANO_ADMIS
+SELECT 
+      ANO_ADMISION
+    , ETNIA
+    , SEXO
+    , COUNT(1) AS NUM_POSTULANTES
+FROM ADMISION.TBL_VW_FT_ADMISION_PAS
+WHERE ETNIA IS NOT NULL
+    AND ETNIA NOT LIKE '%No me considero perteneciente a ninguno de estos pueblos originarios%'
+GROUP BY 
+      ANO_ADMISION
+    , ETNIA
+    , SEXO
+ORDER BY ANO_ADMISION DESC
 ```
 
 ## **3. Postulantes con puntaje nacional por año-periodo de admisión**
