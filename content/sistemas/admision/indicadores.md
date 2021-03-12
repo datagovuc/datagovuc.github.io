@@ -104,7 +104,7 @@ SELECT
 FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD_PAS
 WHERE COD_CASO_ADMIS IN (218, 259, 221, 237, 209, 226)
     AND (COD_EST_POSTULACION = 7
-        OR COD_SIT_POSTULACION = 'U')
+         OR COD_SIT_POSTULACION = 'U')
 GROUP BY
       ANO_ADMIS
     , NOM_CASO_ADMIS
@@ -125,7 +125,7 @@ SELECT
     , COUNT(1) AS NUM_POSTULANTES
 FROM ADMISION.TBL_VW_FT_ADMISION_PAS
 WHERE ETNIA IS NOT NULL
-    AND ETNIA NOT LIKE '%No me considero perteneciente a ninguno de estos pueblos originarios%'
+    AND COD_ETNIA <> 10
 GROUP BY 
       ANO_ADMISION
     , ETNIA
@@ -138,73 +138,90 @@ ORDER BY ANO_ADMISION DESC
 ### **Número de estudiantes con puntaje nacional por año-periodo de admisión**
 
 ```sql
-SELECT ANO_ADMIS
-    , COUNT(1)
-FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD
+SELECT 
+      ANO_ADMIS
+    , SEXO
+    , COUNT(1) AS NUM_POSTULANTES
+FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD_PAS
 WHERE CIE = 850
     OR HYC = 850
     OR LYC = 850
     OR MAT = 850
-GROUP BY ANO_ADMIS
-ORDER BY ANO_ADMIS
+GROUP BY 
+      ANO_ADMIS
+    , SEXO
+ORDER BY ANO_ADMIS DESC
 ```
 
 ## **4. Estudiantes de cursos superiores que postulan a la UC**
 
 ### **Número de estudiantes que no vienen directo de un establecimiento de educación secundaria (año de egreso)**
 
+```sql
+SELECT
+      ANO_ADMISION
+    , COUNT(1) AS NUM_POSTULANTES
+FROM ADMISION.TBL_VW_FT_ADMISION_PAS
+WHERE (ANO_ADMISION - ANO_EGRESO_COLEGIO) > 1
+GROUP BY ANO_ADMISION
+ORDER BY ANO_ADMISION DESC
+```
+
 ## **5. Estudiantes-Postulantes según nacionalidad por año-periodo de admisión**
 
 ### **Número de estudiantres-postulantes según nacionalidad por año-periodo de admisión**
 
 ```sql
--- Desagregado por país
-SELECT COUNT(1) NUM_POSTUL
-    , PA.NOM_PAIS
-    , PE.ANO_ADMIS
-FROM ADMISION.PERSONA_ADMISION AS PA 
-INNER JOIN ADMISION.POSTULACION_EFECT AS PE 
-    ON (PA.RUT = PE.RUT)
+SELECT
+      ANO_ADMISION
+    , PAIS
+    , COUNT(1) AS NUM_POSTULANTES
+FROM ADMISION.TBL_VW_FT_ADMISION_PAS
 GROUP BY 
-      PA.NOM_PAIS
-    , PE.ANO_ADMIS
-ORDER BY 
-      PE.ANO_ADMIS
-
--- Desagregado por nacionalidad (chilena, extranjera)
-SELECT COUNT(1) NUM_POSTUL
-    , PA.NACIONALIDAD
-    , PE.ANO_ADMIS
-FROM ADMISION.PERSONA_ADMISION AS PA 
-INNER JOIN ADMISION.POSTULACION_EFECT AS PE 
-    ON (PA.RUT = PE.RUT)
-GROUP BY 
-      PA.NACIONALIDAD
-    , PE.ANO_ADMIS
-ORDER BY 
-    PE.ANO_ADMIS
+      ANO_ADMISION
+    , PAIS
+ORDER BY ANO_ADMISION DESC
 ```
-
 
 ## **6. Estudiantes-Postulantes según IVE del establecimiento de origen, por año-periodo de admisión**
 
 ### **Número de estudiantes-postulantes según IVE del establecimiento de origen, por año-periodo de admisión**
 
 ```sql
--- Traer trabla INDICE_VULNER_ESCOLAR a la BD Sandbox_Prod
-
-SELECT COUNT(1) AS NUM_POSTUL
-    , ADM.COD_COLEGIO
-    , ADM.ANO_COLEGIO
-    , ADM.NOM_COLEGIO
-FROM ADMISION.INDICE_VULNER_ESCOLAR AS IVE 
-INNER JOIN ADMISION.COLEGIO_ADMISION AS ADM 
-    ON IVE.ROL_BASE_DATO = ADM.ROL_BASE_DATO
-GROUP BY ADM.COD_COLEGIO
-    , ADM.NOM_COLEGIO
-    , ADM.ANO_COLEGIO
-ORDER BY 
-    ADM.ANO_COLEGIO DESC
+SELECT
+  ANO_ADMISION
+  , CASE
+      WHEN IVE_COLEGIO < 30 AND IVE_COLEGIO > 0 THEN 1
+      WHEN IVE_COLEGIO < 55 AND IVE_COLEGIO > 30 THEN 2
+      WHEN IVE_COLEGIO < 75 AND IVE_COLEGIO > 55 THEN 3
+      ELSE 4
+    END AS IVE_TIER
+  , CASE
+      WHEN IVE_COLEGIO < 30 AND IVE_COLEGIO > 0 THEN 'Baja vulnerabilidad'
+      WHEN IVE_COLEGIO < 55 AND IVE_COLEGIO > 30 THEN 'Vulnerabilidad' 
+      WHEN IVE_COLEGIO < 75 AND IVE_COLEGIO > 55 THEN 'Media vulnerabilidad'
+      ELSE 'Alta vulnerabilidad'
+    END AS IVE_TIER_DESC
+  , SEXO 
+  , COUNT(1) AS NUM_POSTULANTES
+FROM ADMISION.TBL_VW_FT_ADMISION_PAS
+WHERE IVE_COLEGIO IS NOT NULL
+GROUP BY 
+  ANO_ADMISION
+  , CASE
+      WHEN IVE_COLEGIO < 30 AND IVE_COLEGIO > 0 THEN 1
+      WHEN IVE_COLEGIO < 55 AND IVE_COLEGIO > 30 THEN 2
+      WHEN IVE_COLEGIO < 75 AND IVE_COLEGIO > 55 THEN 3
+      ELSE 4
+    END
+  , CASE
+      WHEN IVE_COLEGIO < 30 AND IVE_COLEGIO > 0 THEN 'Baja vulnerabilidad'
+      WHEN IVE_COLEGIO < 55 AND IVE_COLEGIO > 30 THEN 'Vulnerabilidad' 
+      WHEN IVE_COLEGIO < 75 AND IVE_COLEGIO > 55 THEN 'Media vulnerabilidad'
+      ELSE 'Alta vulnerabilidad'
+    END
+  , SEXO
+ORDER BY ANO_ADMISION DESC
 ```
 
 
@@ -213,67 +230,79 @@ ORDER BY
 ### **Número de estudiantes seleccionados según carreras de preferencia postulada por año-periodo de admisión**
 
 ```sql
-SELECT COUNT(1) NUM_POSTUL
-    , HC.NOM_CARRERA
-    , PE.ANO_ADMIS
-FROM ADMISION.POSTULACION_EFECT AS PE
-INNER JOIN ADMISION.HIST_CARRERA AS HC
-    ON (PE.CLAVE_NACIONAL = HC.CLAVE_NACIONAL)
-WHERE PE.PREF = 1
-    AND PE.ANO_ADMIS > 2008
-    AND (PE.COD_SIT_POSTULACION_INICIAL = 'S'
-        OR PE.COD_SIT_POSTULACION_ANT = 'S'
-        OR PE.COD_SIT_POSTULACION = 'S')
-GROUP BY HC.NOM_CARRERA
-    , PE.ANO_ADMIS
+SELECT
+     ANO_ADMISION
+    , CARRERA
+    , PREFERENCIA
+    , COUNT(1) AS NUM_POSTULANTES
+FROM ADMISION.TBL_VW_FT_ADMISION_PAS
+WHERE (COD_SIT_POSTUL = 'S'
+       OR COD_SIT_POSTUL_ANT = 'S'
+       OR COD_SIT_POSTUL_INICIAL = 'S')
+GROUP BY
+      ANO_ADMISION
+    , CARRERA
+    , PREFERENCIA
+ORDER BY 
+        ANO_ADMISION DESC
+      , PREFERENCIA ASC
 ```
 
 
 ### **Número de estudiantes matriculados según carreras de preferencia postulada por año-periodo de admisión**
 
 ```sql
-SELECT COUNT(1) NUM_POSTUL
-    , HC.NOM_CARRERA
-    , PE.ANO_ADMIS
-FROM ADMISION.POSTULACION_EFECT AS PE
-INNER JOIN ADMISION.HIST_CARRERA AS HC
-    ON (PE.CLAVE_NACIONAL = HC.CLAVE_NACIONAL)
-WHERE PE.PREF = 1
-    AND PE.ANO_ADMIS > 2008
-    AND (PE.COD_SIT_POSTULACION = 'U'
-        OR PE.COD_SIT_POSTULACION_ANT ='U'
-        OR PE.COD_SIT_POSTULACION_INICIAL ='U')
-GROUP BY HC.NOM_CARRERA
-    , PE.ANO_ADMIS
+SELECT
+     ANO_ADMISION
+    , CARRERA
+    , PREFERENCIA
+    , COUNT(1) AS NUM_POSTULANTES
+FROM ADMISION.TBL_VW_FT_ADMISION_PAS
+WHERE (COD_SIT_POSTUL = 'U'
+       OR COD_SIT_POSTUL_ANT = 'U'
+       OR COD_SIT_POSTUL_INICIAL = 'U')
+GROUP BY
+      ANO_ADMISION
+    , CARRERA
+    , PREFERENCIA
+ORDER BY 
+        ANO_ADMISION DESC
+      , PREFERENCIA ASC
 ```
 
 
 ## **8. Admisión en programas de magister y doctorado**
 
-Revisar si los COD_ESTADO_POSTULACION están correctos.
-
 ### **Número de estudiantes: postulantes, aceptados y rechazados en programas de magíster y doctorado por año-periodo de admisión**
 
 ```sql
-SELECT COUNT(1)
-    , ANO_ADMIS
-FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD
+SELECT 
+      ANO_ADMIS
+    , SEXO
+    , COUNT(1) AS NUM_POSTULANTES
+FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD_PAS
 WHERE COD_CASO_ADMIS IN (110, 150, 190, 111, 125, 112)
-    AND COD_ESTADO_POSTULACION <> 7
-GROUP BY ANO_ADMIS
-ORDER BY ANO_ADMIS
+    AND COD_EST_POSTULACION <> 7
+GROUP BY 
+      ANO_ADMIS
+    , SEXO
+ORDER BY ANO_ADMIS DESC
 ```
 
 ### **Número de matriculados en programas de magíster y doctorado por año-periodo de admisión**
 
 ```sql
-SELECT COUNT(1)
-    , ANO_ADMIS
-FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD
+SELECT 
+      ANO_ADMIS
+    , SEXO
+    , COUNT(1) AS NUM_POSTULANTES
+FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD_PAS
 WHERE COD_CASO_ADMIS IN (110, 150, 190, 111, 125, 112)
-    AND COD_ESTADO_POSTULACION IN (6, 7, 8)
-GROUP BY ANO_ADMIS
-ORDER BY ANO_ADMIS
+    AND COD_EST_POSTULACION IN (6, 7, 8)
+GROUP BY 
+      ANO_ADMIS
+    , SEXO
+ORDER BY ANO_ADMIS DESC
 ```
 
 
