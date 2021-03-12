@@ -306,10 +306,10 @@ ORDER BY ANO_ADMIS DESC
 ```
 
 
-{{< hint danger >}}
+<!-- {{< hint danger >}}
 **DISCLAIMER**  
 Para responder a los indicadores en **2**, **4**, **5**, **6** y **7** se generó la vista:
 ```
 Sandobox-Datagov_Prod.ADMISION.TBL_VW_FT_ADMISION_PAS
 ```
-{{< /hint >}}
+{{< /hint >}} -->
