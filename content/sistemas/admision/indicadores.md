@@ -23,6 +23,18 @@ A continuación un análisis con los cruces para responder a los indicadores par
 | 8 | Admisión en programas de magister y doctorado. | Número de matriculados en programas de magíster y doctorado por año-periodo de admisión. |
 
 
+{{< hint danger >}}
+**DISCLAIMER**  
+Para responder a los indicadores en **2**, **4**, **5**, **6** y **7** se debe usar la vista:
+```
+Sandobox-Datagov_Prod.ADMISION.TBL_VW_FT_ADMISION_PAS
+```
+
+Para responde a los indicadores en **1**, **3** y **8** se debe usar la vista:
+```
+Sandobox-Datagov_Prod.ADMISION.TBL_VW_FT_ADMISION_ESP_ORD_PAS
+```
+{{< /hint >}}
 
 ## **1. Admisión especial, según vía de Equidad**
 
