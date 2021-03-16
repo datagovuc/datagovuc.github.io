@@ -25,14 +25,14 @@ A continuación un análisis con los cruces para responder a los indicadores par
 
 {{< hint danger >}}
 **DISCLAIMER**  
+Para responder a los indicadores en **1**, **3** y **8** se debe usar la vista:
+```
+Sandobox-Datagov_Prod.ADMISION.TBL_VW_FT_ADMISION_ESP_ORD_PAS
+```
+
 Para responder a los indicadores en **2**, **4**, **5**, **6** y **7** se debe usar la vista:
 ```
 Sandobox-Datagov_Prod.ADMISION.TBL_VW_FT_ADMISION_PAS
-```
-
-Para responde a los indicadores en **1**, **3** y **8** se debe usar la vista:
-```
-Sandobox-Datagov_Prod.ADMISION.TBL_VW_FT_ADMISION_ESP_ORD_PAS
 ```
 {{< /hint >}}
 
@@ -40,14 +40,6 @@ Sandobox-Datagov_Prod.ADMISION.TBL_VW_FT_ADMISION_ESP_ORD_PAS
 
 ### **Número de postulantes de carreras de pregrado, según vía de equidad, en un año-periodo de admisión.**
 
-<!-- ```sql
-SELECT ANO_ADMIS
-    , COUNT(1)
-FROM ADMISION.TBL_VW_FT_ADMISION_ESP_ORD 
-WHERE COD_CASO_ADMIS IN (218, 259, 221, 237, 209, 226)
-GROUP BY ANO_ADMIS
-ORDER BY ANO_ADMIS
-``` -->
 ```sql
 SELECT 
       ANO_ADMIS
@@ -224,7 +216,7 @@ ORDER BY ANO_ADMISION DESC
 
 ```sql
 SELECT
-     ANO_ADMISION
+      ANO_ADMISION
     , CARRERA
     , PREFERENCIA
     , COUNT(1) AS NUM_POSTULANTES
@@ -237,8 +229,8 @@ GROUP BY
     , CARRERA
     , PREFERENCIA
 ORDER BY 
-        ANO_ADMISION DESC
-      , PREFERENCIA ASC
+      ANO_ADMISION DESC
+    , PREFERENCIA ASC
 ```
 
 
@@ -246,7 +238,7 @@ ORDER BY
 
 ```sql
 SELECT
-     ANO_ADMISION
+      ANO_ADMISION
     , CARRERA
     , PREFERENCIA
     , COUNT(1) AS NUM_POSTULANTES
@@ -259,8 +251,8 @@ GROUP BY
     , CARRERA
     , PREFERENCIA
 ORDER BY 
-        ANO_ADMISION DESC
-      , PREFERENCIA ASC
+      ANO_ADMISION DESC
+    , PREFERENCIA ASC
 ```
 
 
@@ -297,12 +289,3 @@ GROUP BY
     , SEXO
 ORDER BY ANO_ADMIS DESC
 ```
-
-
-<!-- {{< hint danger >}}
-**DISCLAIMER**  
-Para responder a los indicadores en **2**, **4**, **5**, **6** y **7** se generó la vista:
-```
-Sandobox-Datagov_Prod.ADMISION.TBL_VW_FT_ADMISION_PAS
-```
-{{< /hint >}} -->
