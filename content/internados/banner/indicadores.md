@@ -274,7 +274,7 @@ Cada estudiante tiene un porcentaje de avance curricular, que corresponde al coc
 ## **11. Tasa de aprobación o reprobación**
 ### **Tasa de estudiantes total que aprueban o reprueban los cursos inscritos, respecto del total de estudiantes por curso, en un periodo académico**
 
-A nested query, I know. Queda pendiente poner esta lógica en el cubo (la sábana ya es bastante costosa dada la cantidad de joins). También queda pendiente la tasa.
+<!-- A nested query, I know. Queda pendiente poner esta lógica en el cubo (la sábana ya es bastante costosa dada la cantidad de joins). También queda pendiente la tasa. -->
 
 <!-- ```sql
 SELECT
@@ -324,7 +324,7 @@ ORDER BY periodo_academico DESC
 
 ### **Tasa de estudiantes de 1er año que aprueban o reprueban los cursos inscritos, respecto del total de estudiantes por curso, en un periodo académico**
 
-También queda pendiente la tasa. Sori.
+<!-- También queda pendiente la tasa. Sori. -->
 
 <!-- ```sql
 SELECT top 10
@@ -353,6 +353,8 @@ GROUP BY
   , subquery.estado_curso 
 ORDER BY periodo_academico DESC
 ``` -->
+
+Para calcular la tasa de aprobación/reprobación, agregué una columna que tiene el número de aprobados/reprobados.
 
 ```sql
 SELECT TOP 10
