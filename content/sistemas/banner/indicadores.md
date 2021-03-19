@@ -39,7 +39,7 @@ A continuación un análisis con los cruces para responder a los indicadores par
 ### **Cantidad de estudiantes en un periodo académico, según la dependencia educacional del colegio del cual egresó**
 
 ```sql
-SELECT top 10
+SELECT
     periodo_academico
   , school_financing_type_name
   , COUNT(*) AS num_estudiantes
@@ -54,7 +54,7 @@ ORDER BY periodo_academico DESC
 ### **Cantidad de estudiantes en un periodo académico, según su región o comuna de procedencia**
 
 ```sql
-SELECT top 10
+SELECT
     periodo_academico
   , region
   , COUNT(*) AS num_estudiantes
