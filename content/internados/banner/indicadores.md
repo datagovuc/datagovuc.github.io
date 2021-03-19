@@ -388,7 +388,7 @@ Para responder a los indicadores en **12** y **13** se necesita el dato de durac
 Sólo se consideran en la suma los semestres en que los estudiantes están con situación académica "In progress", con cursos. No se cuentan los periodos en que el alumno está suspendido, anulado, en abandono o renunciado. No deben promediarse programas distintos, ya que la duración estimada podría ser distinta. Sólo entran en el recuento los alumnos que ya han terminado sus programas. Se puede distinguir según cohortes de ingreso o titulación, vías de ingreso, y según si duración hasta el egreso o hasta titulación. 
 -->
 
-## **13 .Estudiantes que egresan o se titulan oportunamente**
+## **13. Estudiantes que egresan o se titulan oportunamente**
 ### **Cantidad de estudiantes que finalizan sus programas académicos en hasta 2 semestres más que la duración oficial de la carrera**
 
 <!-- 
