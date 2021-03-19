@@ -306,7 +306,7 @@ ORDER BY periodo_academico DESC
 Para calcular la tasa de aprobación/reprobación, agregué una columna que tiene el número de aprobados/reprobados.
 
 ```sql
-SELECT TOP 10
+SELECT
     periodo_academico
   , academic_level_name
   , estado_curso
@@ -357,7 +357,7 @@ ORDER BY periodo_academico DESC
 Para calcular la tasa de aprobación/reprobación, agregué una columna que tiene el número de aprobados/reprobados.
 
 ```sql
-SELECT TOP 10
+SELECT
     periodo_academico
   , academic_level_name
   , estado_curso
