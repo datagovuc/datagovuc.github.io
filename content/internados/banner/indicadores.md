@@ -384,8 +384,6 @@ Para responder a los indicadores en **12** y **13** se necesita el dato de durac
 ## **12. Duración real de la carrera**
 ### **Promedio de la suma de semestres que tardan los estudiantes, por cohorte, en completar sus programas**
 
-A littel too complex. It needs more thinking before delivering. Además, no viene el dato de duración de la carrera (viene nulo en `NORMALIZADO_BANNER.ACADEMIC_PROGRAM.duration`)
-
 <!-- 
 Sólo se consideran en la suma los semestres en que los estudiantes están con situación académica "In progress", con cursos. No se cuentan los periodos en que el alumno está suspendido, anulado, en abandono o renunciado. No deben promediarse programas distintos, ya que la duración estimada podría ser distinta. Sólo entran en el recuento los alumnos que ya han terminado sus programas. Se puede distinguir según cohortes de ingreso o titulación, vías de ingreso, y según si duración hasta el egreso o hasta titulación. 
 -->
