@@ -38,7 +38,34 @@ A continuación un análisis con los cruces para responder a los indicadores par
 ## **2.  Estudiantes según información de admisión**
 ### **Cantidad de estudiantes en un periodo académico, según la dependencia educacional del colegio del cual egresó**
 
+```sql
+SELECT top 10
+    periodo_academico
+  , school_financing_type_name
+  , COUNT(*) AS num_estudiantes
+FROM SC.STUDENT_360_PAS
+WHERE school_financing_type_name IS NOT NULL
+GROUP BY 
+    periodo_academico
+  , school_financing_type_name
+ORDER BY periodo_academico DESC
+```
+
 ### **Cantidad de estudiantes en un periodo académico, según su región o comuna de procedencia**
+
+```sql
+SELECT top 10
+    periodo_academico
+  , region
+  , COUNT(*) AS num_estudiantes
+FROM SC.STUDENT_360_PAS
+WHERE region IS NOT NULL
+GROUP BY 
+    periodo_academico
+  , region
+ORDER BY 
+    periodo_academico DESC
+```
 
 
 ## **3. Estudiantes según situación académica**
@@ -223,8 +250,6 @@ Número de alumnos que están vigentes en 2 o más programas en un mismo periodo
 ### **Cantidad de estudiantes que han aprobado todos sus créditos inscritos**
 
 ```sql
-
-
 SELECT
     periodo_academico
   , academic_level_name
