@@ -276,7 +276,7 @@ Cada estudiante tiene un porcentaje de avance curricular, que corresponde al coc
 
 A nested query, I know. Queda pendiente poner esta lógica en el cubo (la sábana ya es bastante costosa dada la cantidad de joins). También queda pendiente la tasa.
 
-```sql
+<!-- ```sql
 SELECT
       subquery.periodo_academico
     , subquery.academic_level_name
@@ -301,13 +301,32 @@ GROUP BY
   , subquery.academic_level_name
   , subquery.estado_curso 
 ORDER BY periodo_academico DESC
+``` -->
+
+Para calcular la tasa de aprobación/reprobación, agregué una columna que tiene el número de aprobados/reprobados.
+
+```sql
+SELECT TOP 10
+    periodo_academico
+  , academic_level_name
+  , estado_curso
+  , COUNT(distinct enrollment_id) as num_estudiantes
+FROM SC.STUDENT_360_PAS
+WHERE registration_type_id IN ('RS', 'RQ', 'RE', 'RW') --cursos inscritos only
+  AND course_grade IS NOT NULL
+  AND academic_level_name IS NOT NULL
+GROUP BY 
+    periodo_academico
+  , academic_level_name
+  , estado_curso
+ORDER BY periodo_academico DESC
 ```
 
 ### **Tasa de estudiantes de 1er año que aprueban o reprueban los cursos inscritos, respecto del total de estudiantes por curso, en un periodo académico**
 
 También queda pendiente la tasa. Sori.
 
-```sql
+<!-- ```sql
 SELECT top 10
       subquery.periodo_academico
     , subquery.academic_level_name
@@ -333,7 +352,26 @@ GROUP BY
   , subquery.academic_level_name
   , subquery.estado_curso 
 ORDER BY periodo_academico DESC
+``` -->
+
+```sql
+SELECT TOP 10
+    periodo_academico
+  , academic_level_name
+  , estado_curso
+  , COUNT(distinct enrollment_id) as num_estudiantes
+FROM SC.STUDENT_360_PAS
+WHERE registration_type_id IN ('RS', 'RQ', 'RE', 'RW') --cursos inscritos only
+  AND LEFT(cohorte, 4) = CAST(year AS NVARCHAR)
+  AND course_grade IS NOT NULL
+  AND academic_level_name IS NOT NULL
+GROUP BY 
+    periodo_academico
+  , academic_level_name
+  , estado_curso
+ORDER BY periodo_academico DESC
 ```
+
 
 {{< hint danger >}}
 **DISCLAIMER**  
