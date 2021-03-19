@@ -3,9 +3,9 @@ weight: 1
 title: "Indicadores"
 ---
 
-# Sesión de Convergencia: Indicadores Admisión
+# Sesión de Convergencia: Indicadores Difusión
 
-A continuación un análisis con los cruces para responder a los indicadores para ADMISIÓN.
+A continuación un análisis con los cruces para responder a los indicadores para Difusión.
 
 | ID | Indicador | Definición |
 | :--: | :-- | :-- |

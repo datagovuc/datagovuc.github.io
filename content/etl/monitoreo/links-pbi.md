@@ -8,6 +8,9 @@ title: "Reportes Power BI"
 Esta seccion blabla
 
 
+<iframe width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiNTZmYmI0ZDMtMGZjMS00NzY2LWJhMWMtOTZhMzZlZmVkNzU2IiwidCI6IjVmZjVkOWZhLWY4M2YtNGFjMS1hNGQyLWViNDhlYTBhMDBkMiIsImMiOjR9&pageName=ReportSectionab6157a6954dee60f37e" frameborder="0" allowFullScreen="true"></iframe>
+
+<iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=0879dd7e-c9c9-434c-9fcf-8471a953dcc7&autoAuth=true&ctid=5ff5d9fa-f83f-4ac1-a4d2-eb48ea0a00d2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWNlbnRyYWwtdXMtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D" frameborder="0" allowFullScreen="true"></iframe>
 
 ## Reportes monitoreo
 
