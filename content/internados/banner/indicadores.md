@@ -34,6 +34,13 @@ A continuación un análisis con los cruces para responder a los indicadores par
 ## **1. Promedio Ponderado Acumulado (PPA)**
 ### **Promedio ponderado de los alumnos a lo largo de su carrera, según la cantidad de créditos de cada curso**
 
+```sql
+SELECT
+    rut
+  , semestre
+  , ppa
+FROM SC.STUDENT_360_PPA_PPS_PAS
+```
 
 ## **2.  Estudiantes según información de admisión**
 ### **Cantidad de estudiantes en un periodo académico, según la dependencia educacional del colegio del cual egresó**
