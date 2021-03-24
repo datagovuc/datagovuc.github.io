@@ -164,10 +164,10 @@ ORDER BY periodo_academico DESC
 ## **6. Deserción por carrera**
 ### **Tasa de alumnos que desertan por cohorte, en cada periódo académico**
 
-Queda pendiente el cálculo de la tasa de estudiante desertados though.
+Cantidad de alumnos desertados por período académico:
 
 ```sql
-SELECT top 10
+SELECT
     cohorte
   , periodo_academico
   , count(*) AS num_estudiante_desertados
