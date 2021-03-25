@@ -84,7 +84,7 @@ Tener en cuentar que el statement `ORDER BY` es "costoso" en términos de recurs
 SELECT
     academic_status_validity_name  -- nombre del estado: vigente, no vigente, vigente sin cursos
   , periodo_academico
-  , count(*) AS num_estudiantes
+  , COUNT(*) AS num_estudiantes
 FROM SC.STUDENT_360_PAS
 GROUP BY 
     academic_status_validity_name
