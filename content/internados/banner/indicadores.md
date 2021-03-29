@@ -29,6 +29,19 @@ A continuación un análisis con los cruces para responder a los indicadores par
 | 13 | Estudiantes que egresan o se titulan oportunamente | Cantidad de estudiantes que finalizan sus programas académicos en hasta 2 semestres más que la duración oficial de la carrera |
 | 13 | Estudiantes que egresan o se titulan oportunamente | Tasa de estudiantes que finalizan sus programas académicos en hasta 2 semestres más que la duración oficial de la carrera, respecto del total de la cohorte |
 
+{{< hint danger >}}
+**DISCLAIMER**  
+Para responder a los indicadores se usan las vistas:
+```
+Sandobox-Datagov_Prod.SC.STUDENT_360_PAS
+```
+
+Y
+
+```
+Sandobox-Datagov_Prod.SC.STUDENT_360_PPA_PPS_PAS
+```
+{{< /hint >}}
 
 
 ## **1. Promedio Ponderado Acumulado (PPA)**
