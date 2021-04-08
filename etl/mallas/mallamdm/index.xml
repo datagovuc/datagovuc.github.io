@@ -3,4 +3,8 @@ El pipeline del proceso de la malla MDM se encuentra en la ruta Fase 1/NORMALIZA
 MDIUC.PERSON_TEST MDIUC.COUNTRY PERSON_TEST # Corresponde a una versión reducida de PERSON. Sus tablas de origen son:
 NORMALIZADO_TEST.PERSON_BANNER NORMALIZADO_TEST.PERSON_PEOPLE_SOFT Cada tabla contiene el RUT, dígito verificador, apellido paterno y materno, y el nombre. Los registros de estas tablas de extrajeron de Banner y PeopleSoft respectivamente.
 Cada tabla contiene 90 registros.
+Existen 80 RUTs que aparecen en ambas tablas.</description></item><item><title>Prueba malla</title><link>https://datagovuc.github.io/etl/mallas/mallamdm/revision/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://datagovuc.github.io/etl/mallas/mallamdm/revision/</guid><description>Pruebas de la malla # Para probar la malla existen dos entidades:
+MDIUC.PERSON_TEST MDIUC.COUNTRY PERSON_TEST # Corresponde a una versión reducida de PERSON. Sus tablas de origen son:
+NORMALIZADO_TEST.PERSON_BANNER NORMALIZADO_TEST.PERSON_PEOPLE_SOFT Cada tabla contiene el RUT, dígito verificador, apellido paterno y materno, y el nombre. Los registros de estas tablas de extrajeron de Banner y PeopleSoft respectivamente.
+Cada tabla contiene 90 registros.
 Existen 80 RUTs que aparecen en ambas tablas.</description></item></channel></rss>
