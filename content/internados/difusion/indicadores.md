@@ -49,13 +49,14 @@ No hay claridad sobre cómo responder este indicador, por lo que se requiere con
 
 ## **2. Potenciales postulantes interesados en la UC que participan en actividades del programa de Difusión**
 
-### **Número de potenciales postulantes interesados en la UC que participan en  actividades del Programa de Difusión**
+### **Número de potenciales postulantes interesados en la UC que participan en actividades del Programa de Difusión**
 
 
 ```sql
 SELECT 
   COUNT(rut) AS num_potenciales_postul
 FROM BDGI.DIFUSION
+WHERE organizador_del_evento = 'Difusión UC'
 ```
 
 ## **3. Colegios que participan en el programa de difusión**
@@ -66,6 +67,7 @@ FROM BDGI.DIFUSION
 SELECT
   COUNT(DISTINCT id_colegio) AS num_colegios
 FROM BDGI.DIFUSION
+WHERE organizador_del_evento = 'Difusión UC'
 ```
 
 ## **4. Potenciales postulantes según carrera de preferencia declarada**
