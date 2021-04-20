@@ -63,11 +63,13 @@ WHERE organizador_del_evento = 'Difusión UC'
 
 ### **Número de colegios que participan en el programa de Difusión**
 
+Aquí incluimos la lógica (dentro de la vista) que nos dio SalesForce.
+
 ```sql
 SELECT
   COUNT(DISTINCT id_colegio) AS num_colegios
 FROM BDGI.DIFUSION
-WHERE organizador_del_evento = 'Difusión UC'
+-- WHERE organizador_del_evento = 'Difusión UC'
 ```
 
 ## **4. Potenciales postulantes según carrera de preferencia declarada**
