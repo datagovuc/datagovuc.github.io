@@ -116,13 +116,11 @@ GROUP BY curso
 
 ### **Número de orientadores y directores de los establecimientos educacionales, que pertenecen a la Red de Apoyo de la Comunidad Educativa**
 
-No hay claridad sobre cómo encontrar el número de directores pues no hay una marca que los diferencie.
-
 ```sql
 SELECT 
-  COUNT(DISTINCT rut) num_orientadores
+  COUNT(DISTINCT rut_rol) num_directores_y_orientadores
 FROM BDGI.DIFUSION
-WHERE curso = 'Profesor-Orientador'
+WHERE nombre_cargo IN ('Director', 'Orientador')
 ```
 
 ## **9. Potenciales postulantes en programa de Preparación y Exploración Vocacional**
