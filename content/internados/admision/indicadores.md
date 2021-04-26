@@ -5,7 +5,7 @@ title: "Indicadores"
 
 # Sesión de Convergencia: Indicadores Admisión
 
-A continuación un análisis con los cruces para responder a los indicadores para ADMISIÓN.
+A continuación un análisis con los cruces para responder a los indicadores para Admisión.
 
 | ID | Indicador | Definición |
 | :--: | :-- | :-- |

@@ -5,7 +5,7 @@ title: "Indicadores"
 
 # Sesión de Convergencia: Indicadores Banner
 
-A continuación un análisis con los cruces para responder a los indicadores para BANNER.
+A continuación un análisis con los cruces para responder a los indicadores para Banner.
 
 | ID | Indicador | Definición |
 | :--: | :-- | :-- |
