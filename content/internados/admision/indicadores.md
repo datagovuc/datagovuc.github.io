@@ -7,20 +7,20 @@ title: "Indicadores"
 
 A continuación un análisis con los cruces para responder a los indicadores para Admisión.
 
-| ID | Indicador | Definición |
-| :--: | :-- | :-- |
-| 1 | Admisión especial, según vía de Equidad. | Número de postulantes de carreras de pregrado, según vía de equidad, en un año-periodo de admisión. |
-| 1 | Admisión especial, según vía de Equidad. | Número de postulantes-seleccionados a carreras de pregrado, según vía de equidad en un año-periodo de admisión. |
-| 1 | Admisión especial, según vía de Equidad. | Número de estudiantes matriculados en carreras de pregrado , según vía de equidad en un año-periodo de admisión. |
-| 2 | Estudiantes-postulantes pertenecientes a una etnia. | Número de estudiantes pertenecientes a una etnia, por año-periodo de admisión. |
-| 3 | Postulantes con puntaje nacional, por  año-periodo de admisión. | Número de estudiantes con puntaje nacional, por año-periodo de admisión. |
-| 4 | Estudiantes de cursos superiores que postulan a la UC. | Número de estudiantes que no vienen directo de un establecimiento de educación secundaria (año de egreso). |
-| 5 | Estudiantes-Postulantes según nacionalidad por año-periodo de admisión. | Número de estudiantres-postulantes según nacionalidad por año-periodo de admisión. |
-| 6 | Estudiantes-Postulantes, según IVE del establecimiento de origen, por año-periodo de admisión. | Número de estudiantes- Postulantes, según IVE del establecimiento de origen, por año-periodo de admisión. | 
-| 7 | Estudiantes, según carreras de preferencia postulada, por año-periodo de admisión. | Número de estudiantes seleccionados, según carreras de preferencia postulada por año-periodo de admisión. | 
-| 7 | Estudiantes, según carreras de preferencia postulada, por año-periodo de admisión. | Número de estudiantes matriculados, según carreras de preferencia postulada por año-periodo de admisión. | 
-| 8 | Admisión en programas de magister y doctorado. | Número de estudiantes: postulantes, aceptados y rechazados en programas de magíster y doctorado por año-periodo de admisión. |
-| 8 | Admisión en programas de magister y doctorado. | Número de matriculados en programas de magíster y doctorado por año-periodo de admisión. |
+| ID | Estado | Indicador | Definición |
+| :--: | :--:| :-- | :-- |
+| 1 | :white_check_mark: | Admisión especial, según vía de Equidad. | Número de postulantes de carreras de pregrado, según vía de equidad, en un año-periodo de admisión. |
+| 1 | :white_check_mark: | Admisión especial, según vía de Equidad. | Número de postulantes-seleccionados a carreras de pregrado, según vía de equidad en un año-periodo de admisión. |
+| 1 | :white_check_mark: | Admisión especial, según vía de Equidad. | Número de estudiantes matriculados en carreras de pregrado , según vía de equidad en un año-periodo de admisión. |
+| 2 | :white_check_mark: | Estudiantes-postulantes pertenecientes a una etnia. | Número de estudiantes pertenecientes a una etnia, por año-periodo de admisión. |
+| 3 | :white_check_mark: | Postulantes con puntaje nacional, por  año-periodo de admisión. | Número de estudiantes con puntaje nacional, por año-periodo de admisión. |
+| 4 | :white_check_mark: | Estudiantes de cursos superiores que postulan a la UC. | Número de estudiantes que no vienen directo de un establecimiento de educación secundaria (año de egreso). |
+| 5 | :white_check_mark: | Estudiantes-Postulantes según nacionalidad por año-periodo de admisión. | Número de estudiantres-postulantes según nacionalidad por año-periodo de admisión. |
+| 6 | :white_check_mark: | Estudiantes-Postulantes, según IVE del establecimiento de origen, por año-periodo de admisión. | Número de estudiantes- Postulantes, según IVE del establecimiento de origen, por año-periodo de admisión. | 
+| 7 | :white_check_mark: | Estudiantes, según carreras de preferencia postulada, por año-periodo de admisión. | Número de estudiantes seleccionados, según carreras de preferencia postulada por año-periodo de admisión. | 
+| 7 | :white_check_mark: | Estudiantes, según carreras de preferencia postulada, por año-periodo de admisión. | Número de estudiantes matriculados, según carreras de preferencia postulada por año-periodo de admisión. | 
+| 8 | :white_check_mark: | Admisión en programas de magister y doctorado. | Número de estudiantes: postulantes, aceptados y rechazados en programas de magíster y doctorado por año-periodo de admisión. |
+| 8 | :white_check_mark: | Admisión en programas de magister y doctorado. | Número de matriculados en programas de magíster y doctorado por año-periodo de admisión. |
 
 
 {{< hint danger >}}

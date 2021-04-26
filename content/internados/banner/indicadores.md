@@ -7,27 +7,28 @@ title: "Indicadores"
 
 A continuación un análisis con los cruces para responder a los indicadores para Banner.
 
-| ID | Indicador | Definición |
-| :--: | :-- | :-- |
-| 1 | Promedio Ponderado Acumulado (PPA) | Promedio ponderado de los alumnos a lo largo de su carrera, según la cantidad de créditos de cada curso |
-| 2 | Estudiantes según información de admisión | Cantidad de estudiantes en un periodo académico, según la dependencia educacional del colegio del cual egresó |
-| 2 | Estudiantes según información de admisión | Cantidad de estudiantes en un periodo académico, según su región o comuna de procedencia | 
-| 3 | Estudiantes según situación académica | Cantidad de estudiantes según la situación académica que presentan en cada periodo académico |
-| 4 | Retiro de cursos | Cantidad de estudiantes, por periodo académico, que retiran cursos | 
-| 4 | Retiro de cursos | Cantidad de cursos retirados, por periodo académico |
-| 5 | Estudiantes según nivel del programa | Cantidad de estudiantes vigentes, en cada periodo académico, según el nivel del programa en el que están inscritos |
-| 6 | Deserción por carrera | Tasa de alumnos que desertan por cohorte, en cada periódo académico |
-| 7 | Estudiantes con cursos inscritos según nivel del curso | Cantidad de estudiantes con cursos inscritos, según el nivel del curso |
-| 8 | Carga académica | Cantidad de cursos inscritos por los estudiantes según el o los programas en los que está adscrito, en un determinado periodo académico |
-| 8 | Carga académica | Cantidad de créditos inscritos por los estudiantes según el o los programas en los que está adscrito, en un determinado periodo académico |
-| 9 | Estudiantes en carreras paralelas | Cantidad de estudiantes que estudian 2 o más programas en forma simultánea |
-| 10 | Estudiantes sin atraso curricular | Cantidad de estudiantes que han aprobado todos sus créditos inscritos |
-| 10 | Estudiantes sin atraso curricular | Cantidad de estudiantes, por cohorte, según grado de avance curricular |
-| 11 | Tasa de aprobación o reprobación | Tasa de estudiantes total que aprueban o reprueban los cursos inscritos, respecto del total de estudiantes por curso, en un periodo académico |
-| 11 | Tasa de aprobación o reprobación | Tasa de estudiantes de 1er año que aprueban o reprueban los cursos inscritos, respecto del total de estudiantes por curso, en un periodo académico |
-| 12 | Duración real de la carrera | Promedio de la suma de semestres que tardan los estudiantes, por cohorte, en completar sus programas |
-| 13 | Estudiantes que egresan o se titulan oportunamente | Cantidad de estudiantes que finalizan sus programas académicos en hasta 2 semestres más que la duración oficial de la carrera |
-| 13 | Estudiantes que egresan o se titulan oportunamente | Tasa de estudiantes que finalizan sus programas académicos en hasta 2 semestres más que la duración oficial de la carrera, respecto del total de la cohorte |
+| ID | Estado | Indicador | Definición |
+| :--: | :--: | :-- | :-- |
+| 1 | | Promedio Ponderado Acumulado (PPA) | Promedio ponderado de los alumnos a lo largo de su carrera, según la cantidad de créditos de cada curso |
+| 2 | :white_check_mark: | Estudiantes según información de admisión | Cantidad de estudiantes en un periodo académico, según la dependencia educacional del colegio del cual egresó |
+| 2 | :white_check_mark: | Estudiantes según información de admisión | Cantidad de estudiantes en un periodo académico, según su región o comuna de procedencia | 
+| 3 | :white_check_mark: | Estudiantes según situación académica | Cantidad de estudiantes según la situación académica que presentan en cada periodo académico |
+| 4 | :white_check_mark: | Retiro de cursos | Cantidad de estudiantes, por periodo académico, que retiran cursos | 
+| 4 | :white_check_mark: | Retiro de cursos | Cantidad de cursos retirados, por periodo académico |
+| 5 | :white_check_mark: | Estudiantes según nivel del programa | Cantidad de estudiantes vigentes, en cada periodo académico, según el nivel del programa en el que están inscritos |
+| 6 | :white_check_mark: | Deserción por carrera | Tasa de alumnos que desertan por cohorte, en cada periódo académico |
+| 7 | :white_check_mark: | Estudiantes con cursos inscritos según nivel del curso | Cantidad de estudiantes con cursos inscritos, según el nivel del curso |
+| 8 | :white_check_mark: | Carga académica | Cantidad de cursos inscritos por los estudiantes según el o los programas en los que está adscrito, en un determinado periodo académico |
+| 8 | :white_check_mark: | Carga académica | Cantidad de créditos inscritos por los estudiantes según el o los programas en los que está adscrito, en un determinado periodo académico |
+| 9 | :white_check_mark: | Estudiantes en carreras paralelas | Cantidad de estudiantes que estudian 2 o más programas en forma simultánea |
+| 9 |  | Estudiantes en carreras paralelas | Número de alumnos que están vigentes en 2 o más programas en un mismo periodo académico |
+| 10 | :white_check_mark: | Estudiantes sin atraso curricular | Cantidad de estudiantes que han aprobado todos sus créditos inscritos |
+| 10 | :white_check_mark: | Estudiantes sin atraso curricular | Cantidad de estudiantes, por cohorte, según grado de avance curricular |
+| 11 | :white_check_mark: | Tasa de aprobación o reprobación | Tasa de estudiantes total que aprueban o reprueban los cursos inscritos, respecto del total de estudiantes por curso, en un periodo académico |
+| 11 | :white_check_mark: | Tasa de aprobación o reprobación | Tasa de estudiantes de 1er año que aprueban o reprueban los cursos inscritos, respecto del total de estudiantes por curso, en un periodo académico |
+| 12 |  | Duración real de la carrera | Promedio de la suma de semestres que tardan los estudiantes, por cohorte, en completar sus programas |
+| 13 |  | Estudiantes que egresan o se titulan oportunamente | Cantidad de estudiantes que finalizan sus programas académicos en hasta 2 semestres más que la duración oficial de la carrera |
+| 13 |  | Estudiantes que egresan o se titulan oportunamente | Tasa de estudiantes que finalizan sus programas académicos en hasta 2 semestres más que la duración oficial de la carrera, respecto del total de la cohorte |
 
 {{< hint danger >}}
 **DISCLAIMER**  
@@ -264,6 +265,8 @@ ORDER BY periodo_academico DESC
 
 <!-- PENDING
 Número de alumnos que están vigentes en 2 o más programas en un mismo periodo académico. Se puede distinguir en el recuento según la combinación de niveles de los programas (por ej: ambos de pregrado, o uno de pregrado y otro de magíster). -->
+
+### **Número de alumnos que están vigentes en 2 o más programas en un mismo periodo académico**
 
 
 ## **10. Estudiantes sin atraso curricular**
