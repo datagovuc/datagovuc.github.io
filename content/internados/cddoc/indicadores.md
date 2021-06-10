@@ -12,7 +12,7 @@ A continuación un análisis con los cruces para responder a los indicadores par
 | 1 | | Estudiantes capacitados como ayudantes de docencia | Número de estudiantes que han sido capacitados por el CDDOC como ayudantes de docencia |
 | 2 | | Ayudantes de docencia que han sido capacitados | Número de ayudantes de docencia que han sido capacitados por el CDDOC |
 | 3 | | Estudiantes beneficiados indirectamente por el CDDOC | Número (y tasa) de alumnos-curso que toman cursos dictados por académicos que han sido capacitados por el CDDOC |
-| 4 | | Docentes capacitados por el CDDOC | Número (y tasa) de académicos que han sido capacitados por el CDDOC |
+| 4 | :white_check_mark: | Docentes capacitados por el CDDOC | Número (y tasa) de académicos que han sido capacitados por el CDDOC |
 | 5 | | Participación de docentes en la Evaluación Temprana de Cursos (ETC) | Tasa de docentes que han participado en la herramientas del Portafolio docente "Evaluación temprana de cursos (ETC)" |
 | 6 | | Participación de docentes en la "Autoevaluación docente" | Tasa de docentes que han participado en la herramienta del Portafolio docente "Autoevaluación Docente" |
 | 7 | | Participación de docentes en la "Videograbación de clases" | Tasa de docentes que han participado en la herramienta del Portafolio docente "Videograbación de clases" |
@@ -31,3 +31,15 @@ A continuación un análisis con los cruces para responder a los indicadores par
 
 Incluir aquí el nombre de la vista/sábana
 {{< /hint >}}
+
+
+
+## **1. Docentes capacitados por el CDDOC**
+
+### **Número (y tasa) de académicos que han sido capacitados por el CDDOC.**
+
+```sql
+SELECT  id_actividad,nombre_actividad,fecha_actividad,COUNT(*) as cantidad_academicos_asisten
+FROM CDDOC.[TBL_VW_docentes_capacitados]
+group by id_actividad,nombre_actividad,fecha_actividad
+```
